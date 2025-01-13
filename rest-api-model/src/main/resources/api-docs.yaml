@@ -11,6 +11,7 @@ paths:
       summary: Gets all User
       description: Gets all users present.
       operationId: getUsers
+      x-spring-paginated: true
       responses:
         "200":
           description: Successful operation
@@ -22,6 +23,24 @@ paths:
                   $ref: "#/components/schemas/User"
 
 components:
+  parameters:
+    findById:
+        name: id
+        in: query
+        description: The ID of object to be returned
+        required: false
+        schema:
+          minimum: 0
+          type: integer
+          default: 0
+    findByName:
+        name: name
+        in: query
+        description: The name of object to be returned
+        required: false
+        schema:
+          type: string
+          default: "name"
   schemas:
     User:
       type: object

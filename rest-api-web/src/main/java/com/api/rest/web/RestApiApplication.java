@@ -1,4 +1,4 @@
-package com.api.rest.web.boot;
+package com.api.rest.web;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
