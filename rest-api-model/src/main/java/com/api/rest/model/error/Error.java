@@ -1,11 +1,10 @@
 package com.api.rest.model.error;
 
-import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.validation.constraints.*;
-
-
 import jakarta.annotation.Generated;
+import jakarta.validation.constraints.NotNull;
+
+import java.util.Objects;
 
 /**
  * Error

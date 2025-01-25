@@ -64,15 +64,15 @@ components:
           type: string
           minLength: 3
           maxLength: 30
-        address:
+        roles:
           type: array
           items:
-            $ref: "#/components/schemas/Address"
+            $ref: "#/components/schemas/Role"
       required:
         - name
         - surname
         - username
-    Address:
+    Role:
       type: object
       properties:
         id:
@@ -82,8 +82,13 @@ components:
           type: string
           minLength: 3
           maxLength: 20
-        user:
-          $ref: "#/components/schemas/User"
+        users:
+          type: array
+          items:
+            $ref: "#/components/schemas/User"
+      required:
+        - description
+
     Error:
       type: object
       properties:

@@ -12,7 +12,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
- * User
+ * Role
  */
 
 @lombok.Getter
@@ -20,30 +20,18 @@ import java.util.stream.Collectors;
 @lombok.NoArgsConstructor
 @lombok.AllArgsConstructor
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-14T21:52:20.312704100+01:00[Europe/Rome]", comments = "Generator version: 7.10.0")
-public class User {
+public class Role {
 
   @JsonProperty("id")
   private Long id;
 
   @NotNull @Size(min = 3, max = 20) 
-  @JsonProperty("name")
-  private String name;
-
-  @NotNull @Size(min = 3, max = 20) 
-  @JsonProperty("surname")
-  private String surname;
-
-  @NotNull @Size(min = 3, max = 30) 
-  @JsonProperty("username")
-  private String username;
-
-  @Size(min = 3, max = 30) 
-  @JsonProperty("email")
-  private String email;
+  @JsonProperty("description")
+  private String description;
 
   @Valid 
-  @JsonProperty("roles")
-  private List<@Valid Role> roles = new ArrayList<>();
+  @JsonProperty("users")
+  private List<@Valid User> users = new ArrayList<>();
 
   @Override
   public boolean equals(Object o) {
@@ -53,28 +41,22 @@ public class User {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    User user = (User) o;
-    return Objects.equals(this.id, user.id) &&
-        Objects.equals(this.name, user.name) &&
-        Objects.equals(this.surname, user.surname) &&
-        Objects.equals(this.username, user.username) &&
-        Objects.equals(this.email, user.email);
+    Role roles = (Role) o;
+    return Objects.equals(this.id, roles.id) &&
+        Objects.equals(this.description, roles.description);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, surname, username, email, roles);
+    return Objects.hash(id, description, users);
   }
 
   @Override
   public String toString() {
-    return "class User {\n" +
+    return "class Role {\n" +
     "    id: " + toIndentedString(id) + "\n" +
-    "    name: " + toIndentedString(name) + "\n" +
-    "    surname: " + toIndentedString(surname) + "\n" +
-    "    username: " + toIndentedString(username) + "\n" +
-    "    email: " + toIndentedString(email) + "\n" +
-    "    roles: " + roles.stream().map(Role::getDescription).collect(Collectors.joining(";")) + "\n" +
+    "    description: " + toIndentedString(description) + "\n" +
+    "    user: " + users.stream().map(User::getName).collect(Collectors.joining(";")) + "\n" +
     "}";
   }
 
