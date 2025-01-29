@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
@@ -8,16 +9,15 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <artifactId>rest-api-model</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
     <name>rest-api-model</name>
     <description>Demo Rest OpenApi Model layer</description>
     <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
-            <groupId>com.api.rest</groupId>
-            <artifactId>rest-api-data</artifactId>
-            <version>${project.version}</version>
+            <groupId>jakarta.annotation</groupId>
+            <artifactId>jakarta.annotation-api</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.openapitools</groupId>

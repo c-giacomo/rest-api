@@ -12,6 +12,8 @@ paths:
       description: Gets all users present.
       operationId: getUsers
       x-spring-paginated: true
+#      parameters:
+#        - $ref: "#/components/parameters/findById"
       responses:
         "200":
           description: Successful operation
@@ -21,6 +23,8 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/User"
+        "500":
+          $ref: "#/components/responses/error500"
 
 components:
   parameters:
@@ -41,6 +45,14 @@ components:
         schema:
           type: string
           default: "name"
+  responses:
+    error500:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            type: object
+            $ref: "#/components/schemas/Error"
   schemas:
     User:
       type: object
@@ -67,7 +79,8 @@ components:
         roles:
           type: array
           items:
-            $ref: "#/components/schemas/Role"
+            type: string
+#           $ref: "#/components/schemas/Role"
       required:
         - name
         - surname
@@ -85,7 +98,8 @@ components:
         users:
           type: array
           items:
-            $ref: "#/components/schemas/User"
+            type: string
+#           $ref: "#/components/schemas/User"
       required:
         - description
 

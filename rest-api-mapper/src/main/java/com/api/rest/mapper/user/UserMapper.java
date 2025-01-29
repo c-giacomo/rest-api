@@ -1,10 +1,18 @@
 package com.api.rest.mapper.user;
 
-import com.api.rest.data.UserEntity;
+import com.api.rest.data.entities.user.UserEntity;
 import com.api.rest.mapper.BaseMapper;
-import com.api.rest.model.pojo.User;
+import com.api.rest.model.user.User;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface UserMapper extends BaseMapper<UserEntity, User> {
+    @Override
+    @Mapping(target = "roles", ignore = true)
+    User map(UserEntity userEntity);
+
+    @Override
+    @Mapping(target = "roles", ignore = true)
+    UserEntity mapReverse(User user);
 }

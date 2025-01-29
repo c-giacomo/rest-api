@@ -5,7 +5,8 @@
  */
 package com.api.rest.web.resources;
 
-import com.api.rest.model.pojo.User;
+import com.api.rest.model.error.Error;
+import com.api.rest.model.user.User;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -14,15 +15,14 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Generated;
 import org.springdoc.core.annotations.ParameterObject;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.List;
-
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-13T20:20:08.077059900+01:00[Europe/Rome]", comments = "Generator version: 7.10.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-25T22:51:08.935573600+01:00[Europe/Rome]", comments = "Generator version: 7.10.0")
 @Validated
 @Tag(name = "Users", description = "the Users API")
 @RequestMapping("${openapi.exampleRestArchetype.base-path:}")
@@ -33,6 +33,7 @@ public interface UsersApi {
      * Gets all users present.
      *
      * @return Successful operation (status code 200)
+     *         or Internal Server Error (status code 500)
      */
     @Operation(
         operationId = "getUsers",
@@ -42,6 +43,9 @@ public interface UsersApi {
         responses = {
             @ApiResponse(responseCode = "200", description = "Successful operation", content = {
                 @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = User.class)))
+            }),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class))
             })
         }
     )
@@ -49,8 +53,6 @@ public interface UsersApi {
         value = "/users",
         produces = { "application/json" }
     )
-    ResponseEntity<List<User>> getUsers(
-        @ParameterObject final Pageable pageable
-    );
+    ResponseEntity<Page<User>> getUsers(@ParameterObject final Pageable pageable);
 
 }
