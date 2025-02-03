@@ -27,7 +27,7 @@
         </dependency>
         <dependency>
             <groupId>com.api.rest</groupId>
-            <artifactId>rest-api-data</artifactId>
+            <artifactId>rest-api-orm</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

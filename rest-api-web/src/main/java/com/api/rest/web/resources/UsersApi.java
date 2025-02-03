@@ -5,15 +5,20 @@
  */
 package com.api.rest.web.resources;
 
-import com.api.rest.model.error.Error;
+import com.api.rest.model.error.ApiError;
 import com.api.rest.model.user.User;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Generated;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,12 +26,57 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-25T22:51:08.935573600+01:00[Europe/Rome]", comments = "Generator version: 7.10.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-02T21:08:18.784777600+01:00[Europe/Rome]", comments = "Generator version: 7.10.0")
 @Validated
-@Tag(name = "Users", description = "the Users API")
+@Tag(name = "User", description = "Operation concerning Users")
 @RequestMapping("${openapi.exampleRestArchetype.base-path:}")
 public interface UsersApi {
+
+    /**
+     * GET /users/{id} : Get User with respective ID
+     * Get user by his ID.
+     *
+     * @param id The ID of object to be returned (required)
+     * @return Successful operation (status code 200)
+     *         or Invalid id provided (status code 400)
+     *         or User not found (status code 404)
+     *         or Internal Server Error (status code 500)
+     */
+    @Operation(
+        operationId = "getUserId",
+        summary = "Get User with respective ID",
+        description = "Get user by his ID.",
+        tags = { "User" },
+        responses = {
+            @ApiResponse(responseCode = "200", description = "Successful operation", content = {
+                @Content(mediaType = "application/xml", schema = @Schema(implementation = User.class)),
+                @Content(mediaType = "application/json", schema = @Schema(implementation = User.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Invalid id provided", content = {
+                @Content(mediaType = "application/xml", schema = @Schema(implementation = ApiError.class)),
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ApiError.class))
+            }),
+            @ApiResponse(responseCode = "404", description = "User not found", content = {
+                @Content(mediaType = "application/xml", schema = @Schema(implementation = ApiError.class)),
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ApiError.class))
+            }),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error", content = {
+                @Content(mediaType = "application/xml", schema = @Schema(implementation = ApiError.class)),
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ApiError.class))
+            })
+        }
+    )
+    @GetMapping(
+        value = "/users/{id}",
+        produces = { "application/xml", "application/json" }
+    )
+    
+    ResponseEntity<User> getUserId(
+        @NotNull @Min(0) @Parameter(name = "id", description = "The ID of object to be returned", required = true, in = ParameterIn.QUERY) @Valid @RequestParam(value = "id", required = true, defaultValue = "0") Integer id
+    );
+
 
     /**
      * GET /users : Gets all User
@@ -39,20 +89,25 @@ public interface UsersApi {
         operationId = "getUsers",
         summary = "Gets all User",
         description = "Gets all users present.",
-        tags = { "Users" },
+        tags = { "User" },
         responses = {
             @ApiResponse(responseCode = "200", description = "Successful operation", content = {
+                @Content(mediaType = "application/xml", array = @ArraySchema(schema = @Schema(implementation = User.class))),
                 @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = User.class)))
             }),
             @ApiResponse(responseCode = "500", description = "Internal Server Error", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class))
+                @Content(mediaType = "application/xml", schema = @Schema(implementation = ApiError.class)),
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ApiError.class))
             })
         }
     )
     @GetMapping(
         value = "/users",
-        produces = { "application/json" }
+        produces = { "application/xml", "application/json" }
     )
-    ResponseEntity<Page<User>> getUsers(@ParameterObject final Pageable pageable);
+    
+    ResponseEntity<Page<User>> getUsers(
+        @ParameterObject final Pageable pageable
+    );
 
 }

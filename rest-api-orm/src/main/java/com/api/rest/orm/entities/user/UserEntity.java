@@ -1,5 +1,6 @@
-package com.api.rest.data;
+package com.api.rest.orm.entities.user;
 
+import com.api.rest.orm.entities.role.RoleEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -41,7 +42,7 @@ public class UserEntity extends Persistence implements Serializable {
     @Column(length = 30)
     private String email;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     private List<RoleEntity> roles = new ArrayList<>();
 
     @Override

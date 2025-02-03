@@ -1,6 +1,6 @@
 package com.api.rest.mapper.role;
 
-import com.api.rest.data.entities.role.RoleEntity;
+import com.api.rest.orm.entities.role.RoleEntity;
 import com.api.rest.mapper.BaseMapper;
 import com.api.rest.model.role.Role;
 import org.mapstruct.Mapper;

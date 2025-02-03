@@ -1,6 +1,6 @@
-package com.api.rest.data.entities.role;
+package com.api.rest.orm.entities.role;
 
-import com.api.rest.data.entities.user.UserEntity;
+import com.api.rest.orm.entities.user.UserEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;

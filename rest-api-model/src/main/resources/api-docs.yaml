@@ -3,21 +3,42 @@ info:
   title: Example Rest Archetype
   version: 0.0.1
 
+tags:
+  - name: User
+    description: Operation concerning Users
+    externalDocs:
+      url: http://giacomino.com/user
+
+
 paths:
+  /example:
+    get:
+      tags:
+        - Example
+      summary: An example endpoint
+      description: An example endpoint
+      operationId: example
+      responses:
+        "500":
+          $ref: "#/components/responses/error500"
+
   /users:
     get:
       tags:
-        - Users
+        - User
       summary: Gets all User
       description: Gets all users present.
       operationId: getUsers
       x-spring-paginated: true
-#      parameters:
-#        - $ref: "#/components/parameters/findById"
       responses:
         "200":
           description: Successful operation
           content:
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
             application/json:
               schema:
                 type: array
@@ -26,33 +47,79 @@ paths:
         "500":
           $ref: "#/components/responses/error500"
 
+  /users/{id}:
+    get:
+      tags:
+        - User
+      summary: Get User with respective ID
+      description: Get user by his ID.
+      operationId: getUserId
+      parameters:
+        - $ref: "#/components/parameters/findById"
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/User"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "400":
+          description: Invalid id provided
+          content:
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+        "404":
+          description: User not found
+          content:
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+        "500":
+          $ref: "#/components/responses/error500"
+
+
 components:
   parameters:
     findById:
-        name: id
-        in: query
-        description: The ID of object to be returned
-        required: false
-        schema:
-          minimum: 0
-          type: integer
-          default: 0
+      name: id
+      in: query
+      description: The ID of object to be returned
+      required: true
+      schema:
+        minimum: 0
+        type: integer
+        default: 0
+
     findByName:
-        name: name
-        in: query
-        description: The name of object to be returned
-        required: false
-        schema:
-          type: string
-          default: "name"
+      name: name
+      in: query
+      description: The name of object to be returned
+      required: true
+      schema:
+        type: string
+        default: "name"
+
   responses:
     error500:
       description: Internal Server Error
       content:
+        application/xml:
+          schema:
+            $ref: "#/components/schemas/ApiError"
         application/json:
           schema:
-            type: object
-            $ref: "#/components/schemas/Error"
+            $ref: "#/components/schemas/ApiError"
+
   schemas:
     User:
       type: object
@@ -80,7 +147,6 @@ components:
           type: array
           items:
             type: string
-#           $ref: "#/components/schemas/Role"
       required:
         - name
         - surname
@@ -99,20 +165,17 @@ components:
           type: array
           items:
             type: string
-#           $ref: "#/components/schemas/User"
       required:
         - description
 
-    Error:
+    ApiError:
       type: object
       properties:
-        code:
-          type: integer
-          format: int32
+        errors:
+          type: array
+          items:
+            type: string
         message:
           type: string
-      required:
-        - code
-        - message
 
 

@@ -16,6 +16,9 @@ public class UsersResource implements UsersApi {
     private final UserService userService;
 
     @Override
+    public ResponseEntity<User> getUserId(Integer id) { return null; }
+
+    @Override
     public ResponseEntity<Page<User>> getUsers(Pageable pageable) {
         return null;
     }

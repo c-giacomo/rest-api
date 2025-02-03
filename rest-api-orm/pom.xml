@@ -8,8 +8,8 @@
         <artifactId>rest-api</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <artifactId>rest-api-data</artifactId>
-    <name>rest-api-data</name>
+    <artifactId>rest-api-orm</artifactId>
+    <name>rest-api-orm</name>
     <description>Demo Rest OpenApi Data (ORM) layer</description>
     <packaging>jar</packaging>
 
@@ -25,7 +25,6 @@
         <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
-            <version>${flyway.version}</version>
         </dependency>
     </dependencies>
 
