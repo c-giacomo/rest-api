@@ -36,7 +36,6 @@
         </dependency>
     </dependencies>
 
-    <!--
     <build>
         <plugins>
             <plugin>
@@ -55,9 +54,10 @@
                             <apiPackage>resources</apiPackage>
                             <modelPackage>model</modelPackage>
                             <generateSupportingFiles>false</generateSupportingFiles>
-                            <templateResourcePath>${project.basedir}/src/templates</templateResourcePath>
+                            <templateResourcePath>${project.basedir}/src/template</templateResourcePath>
                             <apisToGenerate>example</apisToGenerate>
                             <modelsToGenerate>ApiError</modelsToGenerate>
+                            <skip>false</skip>
                             <configOptions>
                                 <generatedConstructorWithRequiredArgs>false</generatedConstructorWithRequiredArgs>
                                 <useSpringBoot3>true</useSpringBoot3>
@@ -72,5 +72,4 @@
             </plugin>
         </plugins>
     </build>
-    -->
 </project>
