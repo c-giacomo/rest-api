@@ -44,6 +44,8 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/User"
+        "404":
+          description: Users not found
         "500":
           $ref: "#/components/responses/error500"
 
@@ -67,23 +69,9 @@ paths:
               schema:
                 $ref: "#/components/schemas/User"
         "400":
-          description: Invalid id provided
-          content:
-            application/xml:
-              schema:
-                $ref: "#/components/schemas/ApiError"
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ApiError"
+          description: Invalid id supplied
         "404":
           description: User not found
-          content:
-            application/xml:
-              schema:
-                $ref: "#/components/schemas/ApiError"
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ApiError"
         "500":
           $ref: "#/components/responses/error500"
 

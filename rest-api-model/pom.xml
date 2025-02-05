@@ -57,7 +57,7 @@
                             <templateResourcePath>${project.basedir}/src/template</templateResourcePath>
                             <apisToGenerate>example</apisToGenerate>
                             <modelsToGenerate>ApiError</modelsToGenerate>
-                            <skip>false</skip>
+                            <skip>true</skip>
                             <configOptions>
                                 <generatedConstructorWithRequiredArgs>false</generatedConstructorWithRequiredArgs>
                                 <useSpringBoot3>true</useSpringBoot3>
