@@ -1,12 +1,13 @@
 package com.api.rest.service;
 
 import com.api.rest.mapper.BaseMapper;
+import com.api.rest.model.exception.ItemNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 /*****
  *
@@ -17,11 +18,11 @@ import java.util.Optional;
  * @param <V> return type
  */
 
-
+@RequiredArgsConstructor
 public abstract class AbstractService<I, R extends JpaRepository<T, I>, M extends BaseMapper<T, V>, T, V> {
 
-    protected M mapper;
-    protected R repository;
+    protected final M mapper;
+    protected final R repository;
 
     public Page<V> findAll(Pageable pageable) {
         return repository.findAll(pageable).map(mapper::map);
@@ -31,7 +32,9 @@ public abstract class AbstractService<I, R extends JpaRepository<T, I>, M extend
         return repository.findAll().stream().map(mapper::map).toList();
     }
 
-    public Optional<V> findById(I id) {
-        return repository.findById(id).map(obj -> mapper.map(obj));
+    public V findById(I id) {
+        return repository.findById(id).map(mapper::map)
+                .orElseThrow(ItemNotFoundException::new);
     }
+
 }

@@ -85,7 +85,7 @@ components:
       required: true
       schema:
         minimum: 0
-        type: integer
+        type: long
         default: 0
 
     findByName:

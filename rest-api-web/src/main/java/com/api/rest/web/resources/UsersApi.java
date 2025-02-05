@@ -6,7 +6,7 @@
 package com.api.rest.web.resources;
 
 import com.api.rest.model.error.ApiError;
-import com.api.rest.model.user.User;
+import com.api.rest.model.bean.user.User;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -68,7 +68,7 @@ public interface UsersApi {
     )
     
     ResponseEntity<User> getUserId(
-        @NotNull @Min(0) @Parameter(name = "id", description = "The ID of object to be returned", required = true, in = ParameterIn.QUERY) @Valid @RequestParam(value = "id", required = true, defaultValue = "0") Integer id
+        @NotNull @Min(0) @Parameter(name = "id", description = "The ID of object to be returned", required = true, in = ParameterIn.QUERY) @Valid @RequestParam(value = "id", required = true, defaultValue = "0") Long id
     );
 
 

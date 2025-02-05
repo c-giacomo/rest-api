@@ -2,7 +2,7 @@ package com.api.rest.mapper.user;
 
 import com.api.rest.orm.entities.user.UserEntity;
 import com.api.rest.mapper.BaseMapper;
-import com.api.rest.model.user.User;
+import com.api.rest.model.bean.user.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
