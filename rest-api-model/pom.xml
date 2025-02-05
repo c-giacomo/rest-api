@@ -54,9 +54,10 @@
                             <apiPackage>resources</apiPackage>
                             <modelPackage>model</modelPackage>
                             <generateSupportingFiles>false</generateSupportingFiles>
-                            <templateResourcePath>${project.basedir}/src/templates</templateResourcePath>
+                            <templateResourcePath>${project.basedir}/src/template</templateResourcePath>
                             <apisToGenerate>example</apisToGenerate>
                             <modelsToGenerate>ApiError</modelsToGenerate>
+                            <skip>true</skip>
                             <configOptions>
                                 <generatedConstructorWithRequiredArgs>false</generatedConstructorWithRequiredArgs>
                                 <useSpringBoot3>true</useSpringBoot3>
