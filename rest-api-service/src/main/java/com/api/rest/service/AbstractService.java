@@ -33,8 +33,6 @@ public abstract class AbstractService<I, R extends JpaRepository<T, I>, M extend
     }
 
     public V findById(I id) {
-        return repository.findById(id).map(mapper::map)
-                .orElseThrow(ItemNotFoundException::new);
+        return repository.findById(id).map(mapper::map).orElseThrow(ItemNotFoundException::new);
     }
-
 }

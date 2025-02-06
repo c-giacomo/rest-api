@@ -8,6 +8,7 @@ import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface RoleMapper extends BaseMapper<RoleEntity, Role> {
+
     @Override
     @Mapping(target = "users", ignore = true)
     Role map(RoleEntity roleEntity);

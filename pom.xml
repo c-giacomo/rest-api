@@ -24,6 +24,7 @@
 		<flyway.version>11.2.0</flyway.version>
 		<mapstruct.version>1.6.3</mapstruct.version>
 		<jackson.databind.version>0.2.6</jackson.databind.version>
+		<jackson.dataformat.xml>2.18.2</jackson.dataformat.xml>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<springdoc.openapi.starter.webmvc.ui.version>2.7.0</springdoc.openapi.starter.webmvc.ui.version>
 		<springdoc.openapi.data.rest.version>1.8.0</springdoc.openapi.data.rest.version>
