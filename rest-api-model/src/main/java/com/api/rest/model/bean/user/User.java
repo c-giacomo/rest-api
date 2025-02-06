@@ -1,4 +1,4 @@
-package com.api.rest.model.user;
+package com.api.rest.model.bean.user;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.annotation.Generated;
