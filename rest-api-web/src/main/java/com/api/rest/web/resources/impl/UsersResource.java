@@ -28,6 +28,6 @@ public class UsersResource implements UsersApi {
 
     @Override
     public ResponseEntity<Page<User>> getUsers(Pageable pageable) {
-        return null;
+        return new ResponseEntity<>(userService.findAll(pageable), HttpStatus.OK);
     }
 }
