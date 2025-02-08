@@ -18,8 +18,10 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Generated;
 import jakarta.validation.constraints.Min;
 import org.springdoc.core.annotations.ParameterObject;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -138,8 +140,8 @@ public interface UsersApi {
         produces = { "application/json", "application/xml" }
     )
     
-    ResponseEntity<Page<User>> getUsers(
-        @ParameterObject final Pageable pageable
+    ResponseEntity<PagedModel<EntityModel<User>>> getUsers(@ParameterObject final Pageable pageable,
+        final PagedResourcesAssembler<User> pagedResourcesAssembler
     );
 
 }

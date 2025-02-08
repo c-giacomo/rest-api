@@ -6,6 +6,9 @@ import com.api.rest.web.resources.UsersApi;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,7 +30,8 @@ public class UsersResource implements UsersApi {
     }
 
     @Override
-    public ResponseEntity<Page<User>> getUsers(Pageable pageable) {
-        return new ResponseEntity<>(userService.findAll(pageable), HttpStatus.OK);
+    public ResponseEntity<PagedModel<EntityModel<User>>> getUsers(Pageable pageable, PagedResourcesAssembler<User> pagedResourcesAssembler) {
+        Page<User> result = userService.findAll(pageable);
+        return new ResponseEntity<>(pagedResourcesAssembler.toModel(result), HttpStatus.OK);
     }
 }
