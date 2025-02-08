@@ -1,4 +1,4 @@
-package com.api.rest.service.exception;
+package com.api.rest.web.exception;
 
 import com.api.rest.model.error.ApiError;
 import com.api.rest.model.exception.ItemNotFoundException;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import java.util.List;
+import java.util.Collections;
 
 
 @ControllerAdvice
@@ -17,7 +17,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 
     @ExceptionHandler(ItemNotFoundException.class)
     public ResponseEntity<ApiError> handleItemNotFoundException(ItemNotFoundException ex, WebRequest request) {
-        ApiError apiError = new ApiError(HttpStatus.NOT_FOUND, List.of(ex.getCause().toString()), ex.getMessage());
+        ApiError apiError = new ApiError(HttpStatus.NOT_FOUND, Collections.emptyList(), ex.getMessage() != null ? ex.getMessage() : "Item Not Found");
         return new ResponseEntity<>(apiError, HttpStatus.NOT_FOUND);
     }
 }
