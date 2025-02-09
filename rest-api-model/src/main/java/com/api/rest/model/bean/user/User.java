@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.annotation.Generated;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +19,7 @@ import java.util.Objects;
 @lombok.NoArgsConstructor
 @lombok.AllArgsConstructor
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-25T17:25:32.808331900+01:00[Europe/Rome]", comments = "Generator version: 7.10.0")
-public class User {
+public class User extends RepresentationModel<User> {
 
   @JsonProperty("id")
   private Long id;

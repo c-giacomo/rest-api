@@ -20,7 +20,6 @@ import jakarta.validation.constraints.Min;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedResourcesAssembler;
-import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.PagedModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -140,7 +139,7 @@ public interface UsersApi {
         produces = { "application/json", "application/xml" }
     )
     
-    ResponseEntity<PagedModel<EntityModel<User>>> getUsers(@ParameterObject final Pageable pageable,
+    ResponseEntity<PagedModel<User>> getUsers(@ParameterObject final Pageable pageable,
         final PagedResourcesAssembler<User> pagedResourcesAssembler
     );
 
