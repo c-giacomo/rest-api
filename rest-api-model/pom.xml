@@ -61,7 +61,7 @@
                             <generateSupportingFiles>false</generateSupportingFiles>
                             <templateResourcePath>${project.basedir}/src/template</templateResourcePath>
                             <apisToGenerate>example</apisToGenerate>
-                            <modelsToGenerate>ApiError</modelsToGenerate>
+                            <modelsToGenerate>ExampleModel</modelsToGenerate>
                             <skip>true</skip>
                             <configOptions>
                                 <generatedConstructorWithRequiredArgs>false</generatedConstructorWithRequiredArgs>
