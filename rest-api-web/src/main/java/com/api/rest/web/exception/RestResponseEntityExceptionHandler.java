@@ -1,23 +1,44 @@
 package com.api.rest.web.exception;
 
-import com.api.rest.model.error.ApiError;
 import com.api.rest.model.exception.ItemNotFoundException;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import java.util.Collections;
+import java.net.URI;
 
 
 @ControllerAdvice
 public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 
+    @Override
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
+        ProblemDetail pd = ProblemDetail.forStatus(HttpStatus.BAD_REQUEST);
+        pd.setTitle("Validation Failed");
+        pd.setDetail("One or more fields are invalid.");
+        pd.setType(URI.create("https://example.com/problems/validation-error"));
+        pd.setInstance(URI.create(request.getDescription(false).replace("uri=", "")));
+
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .headers(headers)
+                .body(pd);
+    }
+
     @ExceptionHandler(ItemNotFoundException.class)
-    public ResponseEntity<ApiError> handleItemNotFoundException(ItemNotFoundException ex, WebRequest request) {
-        ApiError apiError = new ApiError(HttpStatus.NOT_FOUND, Collections.emptyList(), ex.getMessage() != null ? ex.getMessage() : "Item Not Found");
-        return new ResponseEntity<>(apiError, HttpStatus.NOT_FOUND);
+    public ResponseEntity<Object> handleItemNotFoundException(ItemNotFoundException ex, HttpHeaders headers, WebRequest request) {
+        ProblemDetail pd = ProblemDetail.forStatus(HttpStatus.BAD_REQUEST);
+        pd.setTitle(ex.getMessage());
+        pd.setDetail(String.join(",", ex.getErrors()));
+        pd.setType(URI.create("https://example.com/problems/validation-error"));
+        pd.setInstance(URI.create(request.getDescription(false).replace("uri=", "")));
+
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .headers(headers)
+                .body(pd);
     }
 }

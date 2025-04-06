@@ -6,7 +6,6 @@
 package com.api.rest.web.resources;
 
 import com.api.rest.model.bean.user.User;
-import com.api.rest.model.error.ApiError;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -20,13 +19,14 @@ import jakarta.validation.constraints.Min;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-06T20:20:17.683423600+01:00[Europe/Rome]", comments = "Generator version: 7.10.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-04-06T17:13:49.263043900+02:00[Europe/Rome]", comments = "Generator version: 7.10.0")
 @Validated
 @Tag(name = "User", description = "Operation concerning Users")
 @RequestMapping("${openapi.exampleRestArchetype.base-path:}")
@@ -38,8 +38,8 @@ public interface UsersApi {
      *
      * @param id The ID of object to be returned (required)
      * @return Successful operation (status code 200)
-     *         or Invalid id supplied (status code 400)
-     *         or User not found (status code 404)
+     *         or Bad Request (status code 400)
+     *         or Not Found (status code 404)
      *         or Internal Server Error (status code 500)
      */
     @Operation(
@@ -52,11 +52,17 @@ public interface UsersApi {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = User.class)),
                 @Content(mediaType = "application/xml", schema = @Schema(implementation = User.class))
             }),
-            @ApiResponse(responseCode = "400", description = "Invalid id supplied"),
-            @ApiResponse(responseCode = "404", description = "User not found"),
+            @ApiResponse(responseCode = "400", description = "Bad Request", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ProblemDetail.class)),
+                @Content(mediaType = "application/xml", schema = @Schema(implementation = ProblemDetail.class))
+            }),
+            @ApiResponse(responseCode = "404", description = "Not Found", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ProblemDetail.class)),
+                @Content(mediaType = "application/xml", schema = @Schema(implementation = ProblemDetail.class))
+            }),
             @ApiResponse(responseCode = "500", description = "Internal Server Error", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = ApiError.class)),
-                @Content(mediaType = "application/xml", schema = @Schema(implementation = ApiError.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ProblemDetail.class)),
+                @Content(mediaType = "application/xml", schema = @Schema(implementation = ProblemDetail.class))
             })
         }
     )
@@ -64,7 +70,6 @@ public interface UsersApi {
         value = "/users/{id}",
         produces = { "application/json", "application/xml" }
     )
-    
     ResponseEntity<User> getUserId(
         @Min(0L) @Parameter(name = "id", description = "The ID of object to be returned", required = true, in = ParameterIn.PATH) @PathVariable("id") Long id
     );
@@ -76,8 +81,8 @@ public interface UsersApi {
      *
      * @param id The ID of object to be returned (required)
      * @return Successful operation (status code 200)
-     *         or Invalid id supplied (status code 400)
-     *         or User not found (status code 404)
+     *         or Bad Request (status code 400)
+     *         or Not Found (status code 404)
      *         or Internal Server Error (status code 500)
      */
     @Operation(
@@ -90,11 +95,17 @@ public interface UsersApi {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = User.class)),
                 @Content(mediaType = "application/xml", schema = @Schema(implementation = User.class))
             }),
-            @ApiResponse(responseCode = "400", description = "Invalid id supplied"),
-            @ApiResponse(responseCode = "404", description = "User not found"),
+            @ApiResponse(responseCode = "400", description = "Bad Request", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ProblemDetail.class)),
+                @Content(mediaType = "application/xml", schema = @Schema(implementation = ProblemDetail.class))
+            }),
+            @ApiResponse(responseCode = "404", description = "Not Found", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ProblemDetail.class)),
+                @Content(mediaType = "application/xml", schema = @Schema(implementation = ProblemDetail.class))
+            }),
             @ApiResponse(responseCode = "500", description = "Internal Server Error", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = ApiError.class)),
-                @Content(mediaType = "application/xml", schema = @Schema(implementation = ApiError.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ProblemDetail.class)),
+                @Content(mediaType = "application/xml", schema = @Schema(implementation = ProblemDetail.class))
             })
         }
     )
@@ -102,7 +113,6 @@ public interface UsersApi {
         value = "/users/roles/{id}",
         produces = { "application/json", "application/xml" }
     )
-    
     ResponseEntity<User> getUserIdWithRoles(
         @Min(0L) @Parameter(name = "id", description = "The ID of object to be returned", required = true, in = ParameterIn.PATH) @PathVariable("id") Long id
     );
@@ -113,7 +123,8 @@ public interface UsersApi {
      * Gets all users present.
      *
      * @return Successful operation (status code 200)
-     *         or Users not found (status code 404)
+     *         or Bad Request (status code 400)
+     *         or Not Found (status code 404)
      *         or Internal Server Error (status code 500)
      */
     @Operation(
@@ -126,10 +137,17 @@ public interface UsersApi {
                 @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = User.class))),
                 @Content(mediaType = "application/xml", array = @ArraySchema(schema = @Schema(implementation = User.class)))
             }),
-            @ApiResponse(responseCode = "404", description = "Users not found"),
+            @ApiResponse(responseCode = "400", description = "Bad Request", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ProblemDetail.class)),
+                @Content(mediaType = "application/xml", schema = @Schema(implementation = ProblemDetail.class))
+            }),
+            @ApiResponse(responseCode = "404", description = "Not Found", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ProblemDetail.class)),
+                @Content(mediaType = "application/xml", schema = @Schema(implementation = ProblemDetail.class))
+            }),
             @ApiResponse(responseCode = "500", description = "Internal Server Error", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = ApiError.class)),
-                @Content(mediaType = "application/xml", schema = @Schema(implementation = ApiError.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ProblemDetail.class)),
+                @Content(mediaType = "application/xml", schema = @Schema(implementation = ProblemDetail.class))
             })
         }
     )
@@ -137,9 +155,6 @@ public interface UsersApi {
         value = "/users",
         produces = { "application/json", "application/xml" }
     )
-    
-    ResponseEntity<Page<User>> getUsers(
-        @ParameterObject final Pageable pageable
-    );
+    ResponseEntity<Page<User>> getUsers(@ParameterObject final Pageable pageable);
 
 }
