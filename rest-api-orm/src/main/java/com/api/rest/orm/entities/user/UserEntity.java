@@ -40,6 +40,7 @@ public class UserEntity extends Persistence implements Serializable {
     private String username;
 
     @Size(min = 3, max = 30)
+    @jakarta.validation.constraints.Email
     @Column(length = 30)
     private String email;
 
