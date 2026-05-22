@@ -27,17 +27,12 @@
         <dependency>
             <groupId>com.fasterxml.jackson.dataformat</groupId>
             <artifactId>jackson-dataformat-xml</artifactId>
-            <version>${jackson.dataformat.xml}</version>
+            <version>${jackson.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
             <version>${springdoc.openapi.starter.webmvc.ui.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-data-rest</artifactId>
-            <version>${springdoc.openapi.data.rest.version}</version>
         </dependency>
     </dependencies>
 
@@ -61,8 +56,8 @@
                             <generateSupportingFiles>false</generateSupportingFiles>
                             <templateResourcePath>${project.basedir}/src/template</templateResourcePath>
                             <apisToGenerate>example</apisToGenerate>
-                            <modelsToGenerate>ExampleModel</modelsToGenerate>
-                            <skip>true</skip>
+                            <modelsToGenerate>User,Role</modelsToGenerate>
+                            <skip>false</skip>
                             <configOptions>
                                 <generatedConstructorWithRequiredArgs>false</generatedConstructorWithRequiredArgs>
                                 <useSpringBoot3>true</useSpringBoot3>
