@@ -1,4 +1,4 @@
-package com.api.rest.model.bean.role;
+package com.api.rest.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.annotation.Generated;

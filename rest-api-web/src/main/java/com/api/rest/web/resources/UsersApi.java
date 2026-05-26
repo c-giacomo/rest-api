@@ -5,7 +5,7 @@
  */
 package com.api.rest.web.resources;
 
-import com.api.rest.model.bean.user.User;
+import com.api.rest.model.User;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;

@@ -1,6 +1,6 @@
 package com.api.rest.web.resources;
 
-import com.api.rest.model.bean.user.User;
+import com.api.rest.model.User;
 import com.api.rest.service.user.UserService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

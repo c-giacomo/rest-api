@@ -1,6 +1,6 @@
 package com.api.rest.web.resources.impl;
 
-import com.api.rest.model.bean.user.User;
+import com.api.rest.model.User;
 import com.api.rest.service.user.UserService;
 import com.api.rest.web.resources.UsersApi;
 import lombok.RequiredArgsConstructor;
