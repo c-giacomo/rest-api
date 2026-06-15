@@ -56,8 +56,8 @@
                             <generateSupportingFiles>false</generateSupportingFiles>
                             <templateResourcePath>${project.basedir}/src/template</templateResourcePath>
                             <apisToGenerate>example</apisToGenerate>
-                            <modelsToGenerate>User,Role</modelsToGenerate>
-                            <skip>false</skip>
+                            <modelsToGenerate>ExampleModel</modelsToGenerate>
+                            <skip>true</skip>
                             <configOptions>
                                 <generatedConstructorWithRequiredArgs>false</generatedConstructorWithRequiredArgs>
                                 <useSpringBoot3>true</useSpringBoot3>
