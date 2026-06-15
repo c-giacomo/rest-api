@@ -1,15 +1,12 @@
 package com.api.rest.web.resources;
 
-import com.api.rest.model.bean.user.User;
+import com.api.rest.model.User;
 import com.api.rest.service.user.UserService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
+import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -22,18 +19,15 @@ import java.util.List;
 
 import static org.mockito.ArgumentMatchers.isA;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = UsersApi.class)
 @AutoConfigureMockMvc(addFilters = false)
-@ExtendWith(MockitoExtension.class)
 class UserResourceTest {
 
     @Autowired
     private MockMvc mockMvc;
-
-    @Autowired
-    private ObjectMapper objectMapper;
     
     @MockitoBean
     private UserService userService;
@@ -74,7 +68,11 @@ class UserResourceTest {
         mockMvc.perform(get("/api/v1/users/1"))
                 .andExpectAll(
                         status().isOk(),
-                        content().json(objectMapper.writeValueAsString(user))
+                        jsonPath("$.id").value(1L),
+                        jsonPath("$.name").value("Giacomo"),
+                        jsonPath("$.surname").value("Chiavolotti"),
+                        jsonPath("$.email").value("c.giacomo@hotmail.it"),
+                        jsonPath("$.roles[0]").value("ADMIN")
                 );
     }
 

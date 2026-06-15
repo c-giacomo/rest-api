@@ -1,7 +1,13 @@
 package com.api.rest.orm.entities.role;
 
 import com.api.rest.orm.entities.user.UserEntity;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
@@ -17,7 +23,7 @@ import java.util.stream.Collectors;
 @Setter
 @Entity
 @Table(name = "roles")
-public class RoleEntity extends Persistence implements Serializable {
+public class RoleEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
