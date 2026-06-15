@@ -178,6 +178,7 @@ components:
           type: string
           minLength: 3
           maxLength: 30
+          format: email
         roles:
           type: array
           items:

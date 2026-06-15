@@ -35,7 +35,7 @@ public class User {
   @JsonProperty("username")
   private String username;
 
-  @Size(min = 3, max = 30) 
+  @Size(min = 3, max = 30) @jakarta.validation.constraints.Email
   @JsonProperty("email")
   private String email;
   
