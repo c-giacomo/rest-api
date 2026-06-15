@@ -1,35 +1,53 @@
-HELP.md
-target/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
-
-/rest-api-model/src/templates
-
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
-
-### IntelliJ IDEA ###
-.idea
-*.iws
+# IntelliJ
+.idea/
 *.iml
 *.ipr
+*.iws
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
+# Maven
+target/
+dependency-reduced-pom.xml
 
-### VS Code ###
+# Maven Wrapper backup
+.mvn/wrapper/maven-wrapper.jar.old
+
+# Logs
+*.log
+logs/
+
+# Spring Boot
+application-local.yml
+application-local.yaml
+application-dev.yml
+application-dev.yaml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Eclipse
+.project
+.classpath
+.settings/
+
+# VSCode
 .vscode/
+
+# Generated files
+out/
+bin/
+
+# Java
+*.class
+
+# Test reports
+surefire-reports/
+failsafe-reports/
+
+# JaCoCo
+jacoco.exec
+/site/
+
+# Temp
+*.tmp
+*.temp
