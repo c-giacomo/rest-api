@@ -6,34 +6,31 @@
 package com.api.rest.web.resources;
 
 import com.api.rest.model.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springdoc.core.annotations.ParameterObject;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.annotation.Generated;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
-import org.springdoc.core.annotations.ParameterObject;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.http.ProblemDetail;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-09-17T13:22:41.279982300+02:00[Europe/Rome]", comments = "Generator version: 7.16.0")
+import jakarta.validation.constraints.*;
+import jakarta.annotation.Generated;
+
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-09-17T16:52:13.140617300+02:00[Europe/Rome]", comments = "Generator version: 7.16.0")
 @Validated
 @Tag(name = "User", description = "Operation concerning Users")
 @RequestMapping("${openapi.exampleRestArchetype.base-path:}")
 public interface UsersApi {
 
-    public static final String PATH_GET_USER_ID = "/users/{id}";
+    String PATH_GET_USER_ID = "/users/{id}";
     /**
      * GET /users/{id} : Get User with respective ID
      * Get user by his ID.
@@ -56,19 +53,19 @@ public interface UsersApi {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = User.class))
             }),
             @ApiResponse(responseCode = "400", description = "Bad Request", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = ProblemDetail.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = org.springframework.http.ProblemDetail.class))
             }),
             @ApiResponse(responseCode = "401", description = "Unauthorized", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = ProblemDetail.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = org.springframework.http.ProblemDetail.class))
             }),
             @ApiResponse(responseCode = "403", description = "Forbidden", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = ProblemDetail.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = org.springframework.http.ProblemDetail.class))
             }),
             @ApiResponse(responseCode = "404", description = "Not Found", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = ProblemDetail.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = org.springframework.http.ProblemDetail.class))
             }),
             @ApiResponse(responseCode = "500", description = "Internal Server Error", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = ProblemDetail.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = org.springframework.http.ProblemDetail.class))
             })
         }
     )
@@ -83,7 +80,7 @@ public interface UsersApi {
     );
 
 
-    public static final String PATH_GET_USER_ID_WITH_ROLES = "/users/roles/{id}";
+    String PATH_GET_USER_ID_WITH_ROLES = "/users/roles/{id}";
     /**
      * GET /users/roles/{id} : Get User with his Roles from ID
      * Get user (with roles) by his ID.
@@ -106,19 +103,19 @@ public interface UsersApi {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = User.class))
             }),
             @ApiResponse(responseCode = "400", description = "Bad Request", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = ProblemDetail.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = org.springframework.http.ProblemDetail.class))
             }),
             @ApiResponse(responseCode = "401", description = "Unauthorized", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = ProblemDetail.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = org.springframework.http.ProblemDetail.class))
             }),
             @ApiResponse(responseCode = "403", description = "Forbidden", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = ProblemDetail.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = org.springframework.http.ProblemDetail.class))
             }),
             @ApiResponse(responseCode = "404", description = "Not Found", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = ProblemDetail.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = org.springframework.http.ProblemDetail.class))
             }),
             @ApiResponse(responseCode = "500", description = "Internal Server Error", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = ProblemDetail.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = org.springframework.http.ProblemDetail.class))
             })
         }
     )
@@ -133,7 +130,7 @@ public interface UsersApi {
     );
 
 
-    public static final String PATH_GET_USERS = "/users";
+    String PATH_GET_USERS = "/users";
     /**
      * GET /users : Gets all User
      * Gets all users present.
@@ -155,19 +152,19 @@ public interface UsersApi {
                 @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = User.class)))
             }),
             @ApiResponse(responseCode = "400", description = "Bad Request", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = ProblemDetail.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = org.springframework.http.ProblemDetail.class))
             }),
             @ApiResponse(responseCode = "401", description = "Unauthorized", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = ProblemDetail.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = org.springframework.http.ProblemDetail.class))
             }),
             @ApiResponse(responseCode = "403", description = "Forbidden", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = ProblemDetail.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = org.springframework.http.ProblemDetail.class))
             }),
             @ApiResponse(responseCode = "404", description = "Not Found", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = ProblemDetail.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = org.springframework.http.ProblemDetail.class))
             }),
             @ApiResponse(responseCode = "500", description = "Internal Server Error", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = ProblemDetail.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = org.springframework.http.ProblemDetail.class))
             })
         }
     )

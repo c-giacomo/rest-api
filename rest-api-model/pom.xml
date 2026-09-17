@@ -62,6 +62,11 @@
                             <apisToGenerate>users</apisToGenerate>
                             <modelsToGenerate>Role,User</modelsToGenerate>
                             <skip>false</skip>
+                            <schemaMappings>
+                                <schemaMapping>
+                                    ProblemDetail=org.springframework.http.ProblemDetail
+                                </schemaMapping>
+                            </schemaMappings>
                             <configOptions>
                                 <generatedConstructorWithRequiredArgs>false</generatedConstructorWithRequiredArgs>
                                 <useSpringBoot4>true</useSpringBoot4>
