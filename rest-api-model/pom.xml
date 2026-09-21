@@ -35,7 +35,7 @@
         </dependency>
         <dependency>
             <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-starter-webmvc-api</artifactId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
             <version>${springdoc.openapi.starter.webmvc.ui.version}</version>
         </dependency>
     </dependencies>
@@ -61,7 +61,7 @@
                             <templateResourcePath>${project.basedir}/src/template</templateResourcePath>
                             <apisToGenerate>users</apisToGenerate>
                             <modelsToGenerate>Role,User</modelsToGenerate>
-                            <skip>false</skip>
+                            <skip>true</skip>
                             <schemaMappings>
                                 <schemaMapping>
                                     ProblemDetail=org.springframework.http.ProblemDetail

@@ -27,7 +27,7 @@ import jakarta.annotation.Generated;
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-09-17T16:52:13.140617300+02:00[Europe/Rome]", comments = "Generator version: 7.16.0")
 @Validated
 @Tag(name = "User", description = "Operation concerning Users")
-@RequestMapping("${openapi.exampleRestArchetype.base-path:}")
+@RequestMapping("/users/api/v1")
 public interface UsersApi {
 
     String PATH_GET_USER_ID = "/users/{id}";
