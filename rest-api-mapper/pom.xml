@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.api.rest</groupId>
         <artifactId>rest-api</artifactId>
-        <version>0.0.2-SNAPSHOT</version>
+        <version>0.0.2</version>
     </parent>
     <artifactId>rest-api-mapper</artifactId>
     <name>rest-api-mapper</name>
