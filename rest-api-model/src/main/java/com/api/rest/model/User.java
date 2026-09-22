@@ -1,47 +1,47 @@
 package com.api.rest.model;
 
+import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.annotation.Generated;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+
+import jakarta.validation.constraints.*;
+
+
+import jakarta.annotation.Generated;
 
 /**
- * User
- */
-
+* User
+*/
 @lombok.Getter
 @lombok.Setter
 @lombok.NoArgsConstructor
 @lombok.AllArgsConstructor
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-25T17:25:32.808331900+01:00[Europe/Rome]", comments = "Generator version: 7.10.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-09-22T11:20:58.177494300+02:00[Europe/Rome]", comments = "Generator version: 7.16.0")
 public class User {
 
   @JsonProperty("id")
   private Long id;
 
-  @NotNull @Size(min = 3, max = 20) 
   @JsonProperty("name")
+  @NotNull @Size(min = 3, max = 20) 
   private String name;
 
-  @NotNull @Size(min = 3, max = 20) 
   @JsonProperty("surname")
+  @NotNull @Size(min = 3, max = 20) 
   private String surname;
 
-  @NotNull @Size(min = 3, max = 30) 
   @JsonProperty("username")
+  @NotNull @Size(min = 3, max = 30) 
   private String username;
 
-  @Size(min = 3, max = 30) @jakarta.validation.constraints.Email
-  @JsonProperty("email")
+  @JsonProperty("email")@Size(min = 3, max = 30) @jakarta.validation.constraints.Email 
   private String email;
-  
+
   @JsonProperty("roles")
   private List<String> roles = new ArrayList<>();
-
+  
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -73,7 +73,7 @@ public class User {
     "    username: " + toIndentedString(username) + "\n" +
     "    email: " + toIndentedString(email) + "\n" +
     "    roles: " + toIndentedString(roles) + "\n" +
-    "}";
+     "}";
   }
 
   /**
@@ -87,4 +87,3 @@ public class User {
     return o.toString().replace("\n", "\n    ");
   }
 }
-

@@ -1,35 +1,36 @@
 package com.api.rest.model;
 
+import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.annotation.Generated;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+
+import jakarta.validation.constraints.*;
+
+
+import jakarta.annotation.Generated;
 
 /**
- * Role
- */
-
+* Role
+*/
 @lombok.Getter
 @lombok.Setter
 @lombok.NoArgsConstructor
 @lombok.AllArgsConstructor
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-25T17:28:16.759132+01:00[Europe/Rome]", comments = "Generator version: 7.10.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-09-22T11:20:58.177494300+02:00[Europe/Rome]", comments = "Generator version: 7.16.0")
 public class Role {
-  
+
   @JsonProperty("id")
   private Long id;
 
-  @NotNull @Size(min = 3, max = 20) 
   @JsonProperty("description")
+  @NotNull @Size(min = 3, max = 20) 
   private String description;
 
   @JsonProperty("users")
   private List<String> users = new ArrayList<>();
-
+  
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -55,7 +56,7 @@ public class Role {
     "    id: " + toIndentedString(id) + "\n" +
     "    description: " + toIndentedString(description) + "\n" +
     "    users: " + toIndentedString(users) + "\n" +
-    "}";
+     "}";
   }
 
   /**
@@ -69,4 +70,3 @@ public class Role {
     return o.toString().replace("\n", "\n    ");
   }
 }
-

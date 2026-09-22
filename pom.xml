@@ -5,12 +5,12 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>4.0.6</version>
+		<version>4.1.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.api.rest</groupId>
 	<artifactId>rest-api</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<name>rest-api</name>
 	<description>Demo Rest OpenApi with SpringBoot</description>
 	<packaging>pom</packaging>
@@ -24,11 +24,8 @@
 		<flyway.version>11.16.0</flyway.version>
 		<mapstruct.version>1.6.3</mapstruct.version>
 
-		<jackson.databind.version>0.2.10</jackson.databind.version>
-		<jackson.version>2.18.2</jackson.version>
+		<springdoc.openapi.starter.webmvc.ui.version>3.1.1</springdoc.openapi.starter.webmvc.ui.version>
 
-		<springdoc.openapi.starter.webmvc.ui.version>2.8.0</springdoc.openapi.starter.webmvc.ui.version>
-		<springdoc-openapi.version>3.0.0</springdoc-openapi.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
@@ -47,6 +44,14 @@
 	</scm>
 
 	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-flyway</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-core</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
