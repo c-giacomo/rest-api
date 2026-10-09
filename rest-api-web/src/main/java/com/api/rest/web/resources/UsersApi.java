@@ -6,28 +6,30 @@
 package com.api.rest.web.resources;
 
 import com.api.rest.model.User;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springdoc.core.annotations.ParameterObject;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import jakarta.annotation.Generated;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import org.springdoc.core.annotations.ParameterObject;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-import jakarta.validation.constraints.*;
-import jakarta.annotation.Generated;
-
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-09-17T16:52:13.140617300+02:00[Europe/Rome]", comments = "Generator version: 7.16.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-10-09T16:24:50.715632800+02:00[Europe/Rome]", comments = "Generator version: 7.16.0")
 @Validated
 @Tag(name = "User", description = "Operation concerning Users")
-@RequestMapping("/users/api/v1")
+@RequestMapping("${openapi.exampleRestArchetype.base-path:}")
 public interface UsersApi {
 
     String PATH_GET_USER_ID = "/users/{id}";
@@ -174,6 +176,8 @@ public interface UsersApi {
         produces = { "application/json" }
     )
     
-    ResponseEntity<Page<User>> getUsers(@ParameterObject final Pageable pageable);
+    ResponseEntity<Page<User>> getUsers(
+        @ParameterObject final Pageable pageable
+    );
 
 }

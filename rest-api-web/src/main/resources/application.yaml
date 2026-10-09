@@ -76,11 +76,12 @@ app:
       access-token-ttl: 15m
       private-key: file:/git-hub/jwt-keys/private.pem
       public-key: classpath:keys/public.pem
+      enabled: true
 
 # Endpoint root path
-# openapi:
-#   exampleRestArchetype:
-#     base-path: /api/v1
+openapi:
+ exampleRestArchetype:
+   base-path: /api/v1
 
 # NOT NEEDED WITH THE DATASOURCE CONFIG ABOVE
 # spring:
