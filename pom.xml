@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.api.rest</groupId>
 	<artifactId>rest-api</artifactId>
-	<version>0.0.2-SNAPSHOT</version>
+	<version>0.0.3-SNAPSHOT</version>
 	<name>rest-api</name>
 	<description>Demo Rest OpenApi with SpringBoot</description>
 	<packaging>pom</packaging>
@@ -21,7 +21,6 @@
 		<maven.compiler.target>21</maven.compiler.target>
 
 		<lombok.version>1.18.42</lombok.version>
-		<flyway.version>11.16.0</flyway.version>
 		<mapstruct.version>1.6.3</mapstruct.version>
 
 		<springdoc.openapi.starter.webmvc.ui.version>3.1.1</springdoc.openapi.starter.webmvc.ui.version>
@@ -47,10 +46,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-flyway</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.flywaydb</groupId>
-			<artifactId>flyway-core</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>

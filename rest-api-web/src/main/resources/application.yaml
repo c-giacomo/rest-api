@@ -1,0 +1,94 @@
+spring:
+  application:
+    name: rest-api
+
+  lifecycle:
+    timeout-per-shutdown-phase: 10s
+
+  datasource:
+    url: "jdbc:h2:file:C:/workspaceIntelliJ/h2-dbms/rest-api/restapidb;AUTO_SERVER=TRUE;"
+    # url: "jdbc:h2:mem:rest;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;AUTO_RECONNECT=TRUE;"
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  # h2:
+  #   console:
+  #     enabled: true
+  #     settings:
+  #       trace: false
+  #       web-allow-others: false
+
+  # jpa:
+  #   database-platform: org.hibernate.dialect.H2Dialect
+
+  flyway:
+    user: sa
+    password:
+    locations: classpath:migration
+    # enabled: false
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
+    properties:
+      hibernate:
+        query:
+          mutation_strategy:
+            global_temporary:
+              create_tables: false
+              drop_tables: false
+
+        # jakarta:
+        #   persistence:
+        #     schema-generation:
+        #       scripts:
+        #         action: create
+        #         create-target: D:/workspace-intellij/rest-api/rest-api-data/src/flyway/database/script.sql
+        #         create-source: metadata
+
+server:
+  port: 8080
+  servlet:
+    context-path: /REST-API
+  shutdown: graceful
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui
+    enabled: true
+  api-docs:
+    path: /api-docs
+
+logging:
+  level:
+    org.flywaydb: TRACE
+    org.springframework.boot.autoconfigure.flyway: TRACE
+
+# SECURITY CONFIGURATION
+app:
+  security:
+    jwt:
+      issuer: https://api.example.com
+      audience: example-api
+      key-id: key-2026-10
+      access-token-ttl: 15m
+      private-key: file:/git-hub/jwt-keys/private.pem
+      public-key: classpath:keys/public.pem
+
+# Endpoint root path
+# openapi:
+#   exampleRestArchetype:
+#     base-path: /api/v1
+
+# NOT NEEDED WITH THE DATASOURCE CONFIG ABOVE
+# spring:
+#   flyway:
+#     schemas:
+#     url: jdbc:h2:mem:rest
+
+# Optional lazy initialization
+# spring:
+#   main:
+#     lazy-initialization: true
