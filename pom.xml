@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.api.rest</groupId>
 	<artifactId>rest-api</artifactId>
-	<version>0.0.2</version>
+	<version>0.0.3-SNAPSHOT</version>
 	<name>rest-api</name>
 	<description>Demo Rest OpenApi with SpringBoot</description>
 	<packaging>pom</packaging>
@@ -20,12 +20,15 @@
 		<maven.compiler.source>21</maven.compiler.source>
 		<maven.compiler.target>21</maven.compiler.target>
 
+		<!-- BOM VULNERABILITIES -->
 		<lombok.version>1.18.42</lombok.version>
-		<flyway.version>11.16.0</flyway.version>
 		<mapstruct.version>1.6.3</mapstruct.version>
+		<tomcat.version>11.0.26</tomcat.version>
+		<jackson-bom.version>3.1.7</jackson-bom.version>
+		<jackson-2-bom.version>2.21.7</jackson-2-bom.version>
+		<logback.version>1.6.5</logback.version>
 
 		<springdoc.openapi.starter.webmvc.ui.version>3.1.1</springdoc.openapi.starter.webmvc.ui.version>
-
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
@@ -47,10 +50,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-flyway</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.flywaydb</groupId>
-			<artifactId>flyway-core</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
