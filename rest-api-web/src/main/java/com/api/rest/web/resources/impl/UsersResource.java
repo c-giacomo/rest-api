@@ -22,11 +22,6 @@ public class UsersResource implements UsersApi {
     }
 
     @Override
-    public ResponseEntity<User> getUserIdWithRoles(Long id) {
-        return new ResponseEntity<>(userService.findByIdWithRoles(id), HttpStatus.OK);
-    }
-
-    @Override
     public ResponseEntity<Page<User>> getUsers(Pageable pageable) {
         return new ResponseEntity<>(userService.findAll(pageable), HttpStatus.OK);
     }

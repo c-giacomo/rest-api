@@ -26,7 +26,7 @@ spring:
     user: sa
     password:
     locations: classpath:migration
-    # enabled: false
+    enabled: true
 
   jpa:
     hibernate:
@@ -45,7 +45,7 @@ spring:
         #     schema-generation:
         #       scripts:
         #         action: create
-        #         create-target: D:/workspace-intellij/rest-api/rest-api-data/src/flyway/database/script.sql
+        #         create-target: C:/git-hub/rest-api/rest-api-orm/src/database/script.sql
         #         create-source: metadata
 
 server:
@@ -63,8 +63,8 @@ springdoc:
 
 logging:
   level:
-    org.flywaydb: TRACE
-    org.springframework.boot.autoconfigure.flyway: TRACE
+    org.flywaydb: debug
+    org.springframework.boot.autoconfigure.flyway: debug
 
 # Endpoint root path
 openapi:
