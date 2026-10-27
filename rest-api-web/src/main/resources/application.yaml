@@ -19,9 +19,6 @@ spring:
   #       trace: false
   #       web-allow-others: false
 
-  # jpa:
-  #   database-platform: org.hibernate.dialect.H2Dialect
-
   flyway:
     user: sa
     password:
@@ -40,13 +37,13 @@ spring:
               create_tables: false
               drop_tables: false
 
-        # jakarta:
-        #   persistence:
-        #     schema-generation:
-        #       scripts:
-        #         action: create
-        #         create-target: D:/workspace-intellij/rest-api/rest-api-data/src/flyway/database/script.sql
-        #         create-source: metadata
+#    jakarta:
+#      persistence:
+#        schema-generation:
+#          scripts:
+#            action: create
+#            create-target: "C:/git-hub/rest-api/rest-api-orm/src/database/script.sql"
+#            create-source: metadata
 
 server:
   port: 8080
@@ -63,8 +60,8 @@ springdoc:
 
 logging:
   level:
-    org.flywaydb: TRACE
-    org.springframework.boot.autoconfigure.flyway: TRACE
+    org.flywaydb: debug
+    org.springframework.boot.autoconfigure.flyway: debug
 
 # SECURITY CONFIGURATION
 app:

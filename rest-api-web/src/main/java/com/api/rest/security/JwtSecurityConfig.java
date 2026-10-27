@@ -3,6 +3,7 @@ package com.api.rest.security;
 import it.auth.jwt.JwtAuthConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -15,10 +16,12 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
+@Profile("jwtauth")
 @EnableWebSecurity
 @EnableMethodSecurity
-class SecurityConfig {
+class JwtSecurityConfig {
 
+    // TODO IMPLEMENTARE L'USERDETAILSERVICE
     @Bean
     UserDetailsService userDetailsService(PasswordEncoder encoder) {
         return new InMemoryUserDetailsManager(

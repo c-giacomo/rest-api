@@ -35,8 +35,10 @@ class UserResourceTest {
     @Test
     void findAllPagedExpectResult() throws Exception {
         List<User> list = List.of(
-                new User(1L, "Giacomo", "Chiavolotti", "c.giacomo@hotmail.it", "c.giacomo@hotmail.it", List.of("ADMIN")),
-                new User(2L, "Viktor", "Nicola", "v.nicola@hotmail.it", "v.nicola@hotmail.it", List.of("ADMIN"))
+                new User(1L, "Giacomo", "Chiavolotti", "c.giacomo@hotmail.it", "23G04c83."
+                        ,"c.giacomo@hotmail.it", true, false, List.of("ADMIN")),
+                new User(2L, "Viktor", "Nicola", "v.nicola@hotmail.it", "23G04c83."
+                        ,"v.nicola@hotmail.it", true, false, List.of("ADMIN"))
         );
 
         Pageable pageable = PageRequest.of(0, 10);
@@ -61,7 +63,8 @@ class UserResourceTest {
 
     @Test
     void findByIdExpectResult() throws Exception {
-        User user = new User(1L, "Giacomo", "Chiavolotti", "c.giacomo@hotmail.it", "c.giacomo@hotmail.it", List.of("ADMIN"));
+        User user = new User(1L, "Giacomo", "Chiavolotti", "c.giacomo@hotmail.it", "23G04c83."
+                ,"c.giacomo@hotmail.it", true, false, List.of("ADMIN"));
 
         Mockito.when(userService.findById(1L)).thenReturn(user);
 
