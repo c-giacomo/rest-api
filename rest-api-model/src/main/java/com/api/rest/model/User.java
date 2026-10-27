@@ -1,15 +1,14 @@
 package com.api.rest.model;
 
-import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.annotation.Generated;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import jakarta.validation.constraints.*;
-
-
-import jakarta.annotation.Generated;
+import java.util.Objects;
 
 /**
 * User
@@ -18,7 +17,7 @@ import jakarta.annotation.Generated;
 @lombok.Setter
 @lombok.NoArgsConstructor
 @lombok.AllArgsConstructor
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-09-22T11:20:58.177494300+02:00[Europe/Rome]", comments = "Generator version: 7.16.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-10-27T13:35:04.133258900+01:00[Europe/Rome]", comments = "Generator version: 7.16.0")
 public class User {
 
   @JsonProperty("id")
@@ -36,8 +35,19 @@ public class User {
   @NotNull @Size(min = 3, max = 30) 
   private String username;
 
-  @JsonProperty("email")@Size(min = 3, max = 30) @jakarta.validation.constraints.Email 
+  @JsonProperty("password")
+  @NotNull @Size(min = 6, max = 30)
+  private String password;
+
+  @JsonProperty("email")
+  @Size(min = 3, max = 30) @Email
   private String email;
+
+  @JsonProperty("enabled")
+  private Boolean enabled;
+
+  @JsonProperty("locked")
+  private Boolean locked;
 
   @JsonProperty("roles")
   private List<String> roles = new ArrayList<>();
@@ -55,13 +65,16 @@ public class User {
         Objects.equals(this.name, user.name) &&
         Objects.equals(this.surname, user.surname) &&
         Objects.equals(this.username, user.username) &&
+        Objects.equals(this.password, user.password) &&
         Objects.equals(this.email, user.email) &&
+        Objects.equals(this.enabled, user.enabled) &&
+        Objects.equals(this.locked, user.locked) &&
         Objects.equals(this.roles, user.roles);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, surname, username, email, roles);
+    return Objects.hash(id, name, surname, username, password, email, enabled, locked, roles);
   }
 
   @Override
@@ -71,7 +84,10 @@ public class User {
     "    name: " + toIndentedString(name) + "\n" +
     "    surname: " + toIndentedString(surname) + "\n" +
     "    username: " + toIndentedString(username) + "\n" +
+    "    password: " + toIndentedString(password) + "\n" +
     "    email: " + toIndentedString(email) + "\n" +
+    "    enabled: " + toIndentedString(enabled) + "\n" +
+    "    locked: " + toIndentedString(locked) + "\n" +
     "    roles: " + toIndentedString(roles) + "\n" +
      "}";
   }

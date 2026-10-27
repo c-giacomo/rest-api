@@ -82,56 +82,6 @@ public interface UsersApi {
     );
 
 
-    String PATH_GET_USER_ID_WITH_ROLES = "/users/roles/{id}";
-    /**
-     * GET /users/roles/{id} : Get User with his Roles from ID
-     * Get user (with roles) by his ID.
-     *
-     * @param id The ID of object to be returned (required)
-     * @return Successful operation (status code 200)
-     *         or Bad Request (status code 400)
-     *         or Unauthorized (status code 401)
-     *         or Forbidden (status code 403)
-     *         or Not Found (status code 404)
-     *         or Internal Server Error (status code 500)
-     */
-    @Operation(
-        operationId = "getUserIdWithRoles",
-        summary = "Get User with his Roles from ID",
-        description = "Get user (with roles) by his ID.",
-        tags = { "User" },
-        responses = {
-            @ApiResponse(responseCode = "200", description = "Successful operation", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = User.class))
-            }),
-            @ApiResponse(responseCode = "400", description = "Bad Request", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = org.springframework.http.ProblemDetail.class))
-            }),
-            @ApiResponse(responseCode = "401", description = "Unauthorized", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = org.springframework.http.ProblemDetail.class))
-            }),
-            @ApiResponse(responseCode = "403", description = "Forbidden", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = org.springframework.http.ProblemDetail.class))
-            }),
-            @ApiResponse(responseCode = "404", description = "Not Found", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = org.springframework.http.ProblemDetail.class))
-            }),
-            @ApiResponse(responseCode = "500", description = "Internal Server Error", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = org.springframework.http.ProblemDetail.class))
-            })
-        }
-    )
-    @RequestMapping(
-        method = RequestMethod.GET,
-        value = UsersApi.PATH_GET_USER_ID_WITH_ROLES,
-        produces = { "application/json" }
-    )
-    
-    ResponseEntity<User> getUserIdWithRoles(
-            @PathVariable @NotNull @Min(0L) @Parameter(name = "id", description = "The ID of object to be returned", required = true, in = ParameterIn.PATH) Long id
-    );
-
-
     String PATH_GET_USERS = "/users";
     /**
      * GET /users : Gets all User

@@ -1,0 +1,3 @@
+INSERT INTO USER_ROLE (user_id, role) VALUES (1, 'ADMIN');
+INSERT INTO USER_ROLE (user_id, role) VALUES (2, 'SUPERVISOR');
+INSERT INTO USER_ROLE (user_id, role) VALUES (3, 'OPERATOR');

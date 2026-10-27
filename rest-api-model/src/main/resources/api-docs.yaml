@@ -77,33 +77,6 @@ paths:
         "500":
           $ref: "#/components/responses/error500"
 
-  /users/roles/{id}:
-    get:
-      tags:
-        - User
-      summary: Get User with his Roles from ID
-      description: Get user (with roles) by his ID.
-      operationId: getUserIdWithRoles
-      parameters:
-        - $ref: "#/components/parameters/findById"
-      responses:
-        "200":
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/User"
-        "400":
-          $ref: "#/components/responses/error400"
-        "401":
-          $ref: "#/components/responses/error401"
-        "403":
-          $ref: "#/components/responses/error403"
-        "404":
-          $ref: "#/components/responses/error404"
-        "500":
-          $ref: "#/components/responses/error500"
-
 
 components:
   parameters:
@@ -178,11 +151,19 @@ components:
           type: string
           minLength: 3
           maxLength: 30
+        password:
+          type: string
+          minLength: 6
+          maxLength: 30
         email:
           type: string
           minLength: 3
           maxLength: 30
           format: email
+        enabled:
+          type: boolean
+        locked:
+          type: boolean
         roles:
           type: array
           items:
@@ -191,22 +172,7 @@ components:
         - name
         - surname
         - username
-    Role:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        description:
-          type: string
-          minLength: 3
-          maxLength: 20
-        users:
-          type: array
-          items:
-            type: string
-      required:
-        - description
+        - password
 
     ProblemDetail:
       type: object
