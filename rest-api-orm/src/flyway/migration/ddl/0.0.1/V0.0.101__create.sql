@@ -1,7 +1,18 @@
-create sequence IF NOT EXISTS roles_seq start with 1 increment by 50;
-create sequence IF NOT EXISTS users_seq start with 1 increment by 50;
-create table IF NOT EXISTS roles (id bigint not null, description varchar(20) not null, primary key (id));
-create table IF NOT EXISTS users (id bigint not null, name varchar(20) not null, surname varchar(20) not null, email varchar(30), username varchar(30) not null, primary key (id));
-create table IF NOT EXISTS users_roles (roles_id bigint not null, users_id bigint not null);
-alter table if exists users_roles add constraint roles_fk foreign key (roles_id) references roles;
-alter table if exists users_roles add constraint users_fk foreign key (users_id) references users;
+create sequence users_seq start with 1 increment by 1;
+create table user_role (
+    user_id bigint not null,
+    role varchar(255),
+    unique (user_id, role)
+);
+create table users (
+    enabled boolean not null,
+    locked boolean not null,
+    id bigint not null,
+    name varchar(20) not null,
+    surname varchar(20) not null,
+    password varchar(20) not null,
+    email varchar(30),
+    username varchar(30) not null unique,
+    primary key (id)
+);
+alter table if exists user_role add constraint fk_user_id foreign key (user_id) references users;

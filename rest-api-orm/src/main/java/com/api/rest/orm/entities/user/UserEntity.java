@@ -1,24 +1,26 @@
 package com.api.rest.orm.entities.user;
 
-import com.api.rest.orm.entities.role.RoleEntity;
-import jakarta.persistence.CascadeType;
+import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
-import jakarta.validation.Valid;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Getter
@@ -28,7 +30,14 @@ import java.util.stream.Collectors;
 public class UserEntity implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,
+                    generator = "users_generator"
+    )
+    @SequenceGenerator(
+            name = "users_generator",
+            sequenceName = "users_seq",
+            allocationSize = 1
+    )
     private Long id;
 
     @NotNull
@@ -42,17 +51,26 @@ public class UserEntity implements Serializable {
     private String surname;
 
     @NotNull
+    @Size(min = 6, max = 30)
+    private String password;
+
+    @NotNull
     @Size(min = 3, max = 30)
-    @Column(length = 30)
+    @Column(length = 30, nullable = false, unique = true)
     private String username;
 
+    @Email
     @Size(min = 3, max = 30)
-    @jakarta.validation.constraints.Email
     @Column(length = 30)
     private String email;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
-    private List<@Valid RoleEntity> roles = new ArrayList<>();
+    private boolean enabled = true;
+    private boolean locked = false;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
+    @Column(name = "role")
+    private Set<String> roles = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {
@@ -78,7 +96,7 @@ public class UserEntity implements Serializable {
                 ", surname='" + surname + '\'' +
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
-                ", roles=" + roles.stream().map(RoleEntity::getDescription).collect(Collectors.joining(";")) +
+                ", roles=" + roles.stream().peek(System.out::print).collect(Collectors.joining(";")) +
                 '}';
     }
 }
