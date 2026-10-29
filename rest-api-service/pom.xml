@@ -23,7 +23,7 @@
         <dependency>
             <groupId>it.auth.jwt</groupId>
             <artifactId>jwt-auth</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>${jwt.auth.version}</version>
         </dependency>
         <!-- SECURITY -->
         <dependency>

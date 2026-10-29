@@ -29,6 +29,7 @@ paths:
       summary: Gets all User
       description: Gets all users present.
       operationId: getUsers
+      x-spring-provide-args: ['@org.springframework.security.core.annotation.AuthenticationPrincipal ApplicationUser applicationUser']
       x-spring-paginated: true
       responses:
         "200":
@@ -57,6 +58,7 @@ paths:
       summary: Get User with respective ID
       description: Get user by his ID.
       operationId: getUserId
+      x-spring-provide-args: ['@org.springframework.security.core.annotation.AuthenticationPrincipal ApplicationUser applicationUser']
       parameters:
         - $ref: "#/components/parameters/findById"
       responses:

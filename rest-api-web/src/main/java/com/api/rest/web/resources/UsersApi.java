@@ -6,6 +6,7 @@
 package com.api.rest.web.resources;
 
 import com.api.rest.model.User;
+import com.api.rest.service.security.ApplicationUser;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -21,12 +22,13 @@ import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-10-09T16:24:50.715632800+02:00[Europe/Rome]", comments = "Generator version: 7.16.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-10-29T14:57:59.008733100+01:00[Europe/Rome]", comments = "Generator version: 7.16.0")
 @Validated
 @Tag(name = "User", description = "Operation concerning Users")
 @RequestMapping("${openapi.exampleRestArchetype.base-path:}")
@@ -78,7 +80,8 @@ public interface UsersApi {
     )
     
     ResponseEntity<User> getUserId(
-            @PathVariable @NotNull @Min(0L) @Parameter(name = "id", description = "The ID of object to be returned", required = true, in = ParameterIn.PATH) Long id
+            @PathVariable @NotNull @Min(0L) @Parameter(name = "id", description = "The ID of object to be returned", required = true, in = ParameterIn.PATH) Long id,
+            @Parameter(hidden = true) @AuthenticationPrincipal ApplicationUser applicationUser
     );
 
 
@@ -127,7 +130,8 @@ public interface UsersApi {
     )
     
     ResponseEntity<Page<User>> getUsers(
-        @ParameterObject final Pageable pageable
+            @ParameterObject final Pageable pageable,
+            @Parameter(hidden = true) @AuthenticationPrincipal ApplicationUser applicationUser
     );
 
 }
