@@ -1,4 +1,4 @@
-package com.api.rest.security;
+package com.api.rest.config.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

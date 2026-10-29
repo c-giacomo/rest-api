@@ -51,7 +51,7 @@ public class UserEntity implements Serializable {
     private String surname;
 
     @NotNull
-    @Size(min = 6, max = 30)
+    @Size(min = 6, max = 250)
     private String password;
 
     @NotNull

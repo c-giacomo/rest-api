@@ -10,7 +10,7 @@ create table users (
     id bigint not null,
     name varchar(20) not null,
     surname varchar(20) not null,
-    password varchar(20) not null,
+    password varchar(250) not null,
     email varchar(30),
     username varchar(30) not null unique,
     primary key (id)

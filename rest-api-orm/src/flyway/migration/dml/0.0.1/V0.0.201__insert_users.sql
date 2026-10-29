@@ -4,7 +4,7 @@ INSERT INTO USERS (id, name, surname, username, email, password, locked, enabled
                                                                                 'Chiavolotti',
                                                                                 'c-giacomo',
                                                                                 'c.giacomo@hotmail.it',
-                                                                                '23G04c83.',
+                                                                                '{bcrypt}$2a$12$aTc0VDpAtbWmmJ4PrDiMauy88lFKXVVodpNDGHyZaFLz/mgjFcMLC',
                                                                                 false,
                                                                                 true
                                                                                );
@@ -14,7 +14,7 @@ INSERT INTO USERS (id, name, surname, username, email, password, locked, enabled
                                                                                 'Chiavolotti',
                                                                                 'c-mauro',
                                                                                 'mauro.chiavolotti@hotmail.com',
-                                                                                '23G04c83.',
+                                                                                '{bcrypt}$2a$12$aTc0VDpAtbWmmJ4PrDiMauy88lFKXVVodpNDGHyZaFLz/mgjFcMLC',
                                                                                 false,
                                                                                 true
                                                                                );
@@ -24,7 +24,7 @@ INSERT INTO USERS (id, name, surname, username, email, password, locked, enabled
                                                                                 'Orsini',
                                                                                 'a-orsini',
                                                                                 'anna.orsini@hotmail.com',
-                                                                                '23G04c83.',
+                                                                                '{bcrypt}$2a$12$aTc0VDpAtbWmmJ4PrDiMauy88lFKXVVodpNDGHyZaFLz/mgjFcMLC',
                                                                                 false,
                                                                                 true
                                                                                );
