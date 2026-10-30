@@ -3,7 +3,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-package com.api.rest.web.resources;
+package com.api.rest.web.resources.users;
 
 import com.api.rest.model.User;
 import com.api.rest.service.security.ApplicationUser;

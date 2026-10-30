@@ -18,7 +18,6 @@ public class DatabaseUserDetailsService implements UserDetailsService {
 
     @Override
     @Transactional(readOnly = true)
-    @Cacheable(value = "users", key = "#username")
     public UserDetails loadUserByUsername(@NonNull String username) throws UsernameNotFoundException {
         return repository.findByUsername(username)
                 .map(ApplicationUser::new)
