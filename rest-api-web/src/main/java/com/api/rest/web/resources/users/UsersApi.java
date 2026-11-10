@@ -82,6 +82,8 @@ public interface UsersApi {
     ResponseEntity<User> getUserId(
             @PathVariable @NotNull @Min(0L) @Parameter(name = "id", description = "The ID of object to be returned", required = true, in = ParameterIn.PATH) Long id,
             @Parameter(hidden = true) @AuthenticationPrincipal ApplicationUser applicationUser
+    );
+
     String PATH_GET_USERS = "/users";
     /**
      * GET /users : Gets all User
