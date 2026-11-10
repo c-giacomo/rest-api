@@ -23,7 +23,7 @@ spring:
     user: sa
     password:
     locations: classpath:migration
-    # enabled: false
+    enabled: true
 
   jpa:
     hibernate:
@@ -37,13 +37,13 @@ spring:
               create_tables: false
               drop_tables: false
 
-#    jakarta:
-#      persistence:
-#        schema-generation:
-#          scripts:
-#            action: create
-#            create-target: "C:/git-hub/rest-api/rest-api-orm/src/database/script.sql"
-#            create-source: metadata
+#      jakarta:
+#        persistence:
+#          schema-generation:
+#            scripts:
+#              action: create
+#              create-target: "C:/git-hub/rest-api/rest-api-orm/src/database/script.sql"
+#              create-source: metadata
 
 server:
   port: 8080

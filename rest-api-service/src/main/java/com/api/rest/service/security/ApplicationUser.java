@@ -1,6 +1,6 @@
 package com.api.rest.service.security;
 
-import com.api.rest.orm.entities.user.UserEntity;
+import com.api.rest.orm.entities.UserEntity;
 import lombok.Getter;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;

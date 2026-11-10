@@ -1,6 +1,6 @@
-package com.api.rest.orm.repositories.user;
+package com.api.rest.orm.repositories;
 
-import com.api.rest.orm.entities.user.UserEntity;
+import com.api.rest.orm.entities.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

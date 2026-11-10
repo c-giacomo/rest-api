@@ -176,6 +176,64 @@ components:
         - username
         - password
 
+    Expense:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        description:
+          type: string
+          minLength: 3
+          maxLength: 40
+        amount:
+          type: number
+          format: double
+        date:
+          type: string
+          format: date-time
+        product:
+          type: array
+          items:
+            $ref: "#/components/schemas/Product"
+        user:
+          $ref: "#/components/schemas/User"
+
+    Category:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+          minLength: 3
+          maxLength: 40
+        description:
+          type: string
+          minLength: 3
+          maxLength: 40
+
+    Product:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+          minLength: 3
+          maxLength: 40
+        description:
+          type: string
+          minLength: 3
+          maxLength: 40
+        price:
+          type: number
+          format: double
+        type:
+          $ref: "#/components/schemas/Category"
+
     ProblemDetail:
       type: object
 

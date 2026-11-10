@@ -40,12 +40,6 @@ spring:
               create_tables: false
               drop_tables: false
 
-# DISABLE SECURITY
-app:
-  security:
-    jwt:
-      enabled: false
-
 #      jakarta:
 #        persistence:
 #          schema-generation:
@@ -53,6 +47,12 @@ app:
 #              action: create
 #              create-target: "C:/git-hub/rest-api/rest-api-orm/src/database/script.sql"
 #              create-source: metadata
+
+# DISABLE SECURITY
+app:
+  security:
+    jwt:
+      enabled: false
 
 server:
   port: 8080

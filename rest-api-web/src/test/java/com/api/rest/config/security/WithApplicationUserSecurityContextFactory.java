@@ -1,6 +1,6 @@
 package com.api.rest.config.security;
 
-import com.api.rest.orm.entities.user.UserEntity;
+import com.api.rest.orm.entities.UserEntity;
 import com.api.rest.service.security.ApplicationUser;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContext;

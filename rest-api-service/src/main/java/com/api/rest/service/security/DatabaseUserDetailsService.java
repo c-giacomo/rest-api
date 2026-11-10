@@ -1,9 +1,8 @@
 package com.api.rest.service.security;
 
-import com.api.rest.orm.repositories.user.UserEntityRepository;
+import com.api.rest.orm.repositories.UserEntityRepository;
 import lombok.RequiredArgsConstructor;
 import org.jspecify.annotations.NonNull;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
