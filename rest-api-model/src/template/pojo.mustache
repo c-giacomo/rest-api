@@ -63,20 +63,20 @@ public class {{classname}}{{#parent}} extends {{{parent}}}{{/parent}}{{^parent}}
   {{/useBeanValidation}}
   {{/lombok.RequiredArgsConstructor}}
   @JsonProperty("{{baseName}}"){{!
-}}{{#vendorExtensions.x-field-extra-annotation}}{{!
-}}{{{vendorExtensions.x-field-extra-annotation}}}{{!
-}}{{/vendorExtensions.x-field-extra-annotation}}{{!
-}}{{#vendorExtensions.x-extra-annotation}}{{!
-}}{{{vendorExtensions.x-extra-annotation}}}{{!
-}}{{/vendorExtensions.x-extra-annotation}}{{!
-}}{{#useBeanValidation}}{{!
+}}{{#vendorExtensions.x-field-extra-annotation}}
+  {{{vendorExtensions.x-field-extra-annotation}}}
+  {{/vendorExtensions.x-field-extra-annotation}}
+  {{#vendorExtensions.x-extra-annotation}}
+  {{{vendorExtensions.x-extra-annotation}}}
+  {{/vendorExtensions.x-extra-annotation}}
+  {{#useBeanValidation}}{{!
 }}{{>beanValidation}}{{!
+}}{{/useBeanValidation}}{{!
+}}{{^useBeanValidation}}{{!
+}}{{#required}}{{!
+}}@NotNull{{!
+}}{{/required}}{{!
 }}{{/useBeanValidation}}
-  {{^useBeanValidation}}
-  {{#required}}
-  @NotNull
-  {{/required}}
-  {{/useBeanValidation}}
   {{#jackson}}
   {{#withXml}}
   @JacksonXmlProperty(localName = "{{items.xmlName}}{{^items.xmlName}}{{xmlName}}{{^xmlName}}{{baseName}}{{/xmlName}}{{/items.xmlName}}"{{#isXmlAttribute}}, isAttribute = true{{/isXmlAttribute}}{{#xmlNamespace}}, namespace = "{{.}}"{{/xmlNamespace}})

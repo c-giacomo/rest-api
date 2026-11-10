@@ -1,12 +1,12 @@
-package com.api.rest.web.resources;
+package com.api.rest.web.resources.users;
 
+import com.api.rest.RestMvcControllerTest;
+import com.api.rest.config.security.WithApplicationUser;
 import com.api.rest.model.User;
 import com.api.rest.service.user.UserService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
-import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -22,17 +22,17 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(controllers = UsersApi.class)
-@AutoConfigureMockMvc(addFilters = false)
+@RestMvcControllerTest(controllers = UsersApi.class)
 class UserResourceTest {
 
     @Autowired
     private MockMvc mockMvc;
-    
+
     @MockitoBean
     private UserService userService;
 
     @Test
+    @WithApplicationUser(roles = "ADMIN")
     void findAllPagedExpectResult() throws Exception {
         List<User> list = List.of(
                 new User(1L, "Giacomo", "Chiavolotti", "c.giacomo@hotmail.it", "23G04c83."
@@ -62,6 +62,7 @@ class UserResourceTest {
 
 
     @Test
+    @WithApplicationUser(roles = "ADMIN")
     void findByIdExpectResult() throws Exception {
         User user = new User(1L, "Giacomo", "Chiavolotti", "c.giacomo@hotmail.it", "23G04c83."
                 ,"c.giacomo@hotmail.it", true, false, List.of("ADMIN"));

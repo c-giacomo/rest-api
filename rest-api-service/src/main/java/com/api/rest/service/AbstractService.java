@@ -1,7 +1,7 @@
 package com.api.rest.service;
 
 import com.api.rest.mapper.BaseMapper;
-import com.api.rest.model.exception.ItemNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -33,6 +33,6 @@ public abstract class AbstractService<I, R extends JpaRepository<T, I>, M extend
     }
 
     public V findById(I id) {
-        return repository.findById(id).map(mapper::map).orElseThrow(ItemNotFoundException::new);
+        return repository.findById(id).map(mapper::map).orElseThrow(() -> new EntityNotFoundException("Entity not found with id: " + id));
     }
 }

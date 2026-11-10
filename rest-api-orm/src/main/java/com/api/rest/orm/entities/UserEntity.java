@@ -1,10 +1,11 @@
-package com.api.rest.orm.entities.user;
+package com.api.rest.orm.entities;
 
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -51,7 +52,7 @@ public class UserEntity implements Serializable {
     private String surname;
 
     @NotNull
-    @Size(min = 6, max = 30)
+    @Size(min = 6, max = 250)
     private String password;
 
     @NotNull
@@ -68,9 +69,14 @@ public class UserEntity implements Serializable {
     private boolean locked = false;
 
     @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
+    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(
+            name = "user_id"),
+            foreignKey = @ForeignKey(name = "fk_user_role")
+    )
     @Column(name = "role")
     private Set<String> roles = new HashSet<>();
+
+
 
     @Override
     public boolean equals(Object o) {
