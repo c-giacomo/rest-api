@@ -10,9 +10,9 @@ create table users (
     id bigint not null,
     name varchar(20) not null,
     surname varchar(20) not null,
-    password varchar(20) not null,
+    password varchar(250) not null,
     email varchar(30),
     username varchar(30) not null unique,
     primary key (id)
 );
-alter table if exists user_role add constraint fk_user_id foreign key (user_id) references users;
+alter table if exists user_role add constraint fk_user_role foreign key (user_id) references users;

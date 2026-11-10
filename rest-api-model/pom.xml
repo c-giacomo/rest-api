@@ -51,7 +51,7 @@
                             <templateResourcePath>${project.basedir}/src/template</templateResourcePath>
                             <apisToGenerate>example</apisToGenerate>
                             <modelsToGenerate>User</modelsToGenerate>
-                            <skip>true</skip>
+                            <skip>true</skip>>
                             <schemaMappings>
                                 <schemaMapping>
                                     ProblemDetail=org.springframework.http.ProblemDetail

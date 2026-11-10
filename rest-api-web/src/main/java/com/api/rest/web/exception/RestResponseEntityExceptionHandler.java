@@ -1,7 +1,11 @@
 package com.api.rest.web.exception;
 
-import com.api.rest.model.exception.ItemNotFoundException;
-import org.springframework.http.*;
+import jakarta.persistence.EntityNotFoundException;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ProblemDetail;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -28,11 +32,11 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
                 .body(pd);
     }
 
-    @ExceptionHandler(ItemNotFoundException.class)
-    public ResponseEntity<Object> handleItemNotFoundException(ItemNotFoundException ex, WebRequest request) {
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ResponseEntity<Object> handleItemNotFoundException(EntityNotFoundException ex, WebRequest request) {
         ProblemDetail pd = ProblemDetail.forStatus(HttpStatus.BAD_REQUEST);
         pd.setTitle(ex.getMessage());
-        pd.setDetail(String.join(",", ex.getErrors()));
+        pd.setDetail(String.join(",", ex.getMessage()));
         pd.setType(URI.create("https://example.com/problems/validation-error"));
         pd.setInstance(URI.create(request.getDescription(false).replace("uri=", "")));
 

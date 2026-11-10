@@ -29,6 +29,7 @@ paths:
       summary: Gets all User
       description: Gets all users present.
       operationId: getUsers
+      x-spring-provide-args: ['@org.springframework.security.core.annotation.AuthenticationPrincipal ApplicationUser applicationUser']
       x-spring-paginated: true
       responses:
         "200":
@@ -57,6 +58,27 @@ paths:
       summary: Get User with respective ID
       description: Get user by his ID.
       operationId: getUserId
+      x-spring-provide-args: ['@org.springframework.security.core.annotation.AuthenticationPrincipal ApplicationUser applicationUser']
+      parameters:
+        - $ref: "#/components/parameters/findById"
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "400":
+          $ref: "#/components/responses/error400"
+        "401":
+          $ref: "#/components/responses/error401"
+        "403":
+          $ref: "#/components/responses/error403"
+        "404":
+          $ref: "#/components/responses/error404"
+        "500":
+          $ref: "#/components/responses/error500"
+
       parameters:
         - $ref: "#/components/parameters/findById"
       responses:
@@ -173,6 +195,64 @@ components:
         - surname
         - username
         - password
+
+    Expense:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        description:
+          type: string
+          minLength: 3
+          maxLength: 40
+        amount:
+          type: number
+          format: double
+        date:
+          type: string
+          format: date-time
+        product:
+          type: array
+          items:
+            $ref: "#/components/schemas/Product"
+        user:
+          $ref: "#/components/schemas/User"
+
+    Category:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+          minLength: 3
+          maxLength: 40
+        description:
+          type: string
+          minLength: 3
+          maxLength: 40
+
+    Product:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+          minLength: 3
+          maxLength: 40
+        description:
+          type: string
+          minLength: 3
+          maxLength: 40
+        price:
+          type: number
+          format: double
+        type:
+          $ref: "#/components/schemas/Category"
 
     ProblemDetail:
       type: object
