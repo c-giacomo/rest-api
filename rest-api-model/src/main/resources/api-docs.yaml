@@ -8,6 +8,10 @@ tags:
     description: Operation concerning Users
     externalDocs:
       url: http://giacomino.com/user
+  - name: Category
+    description: Operation concerning Categories
+    externalDocs:
+      url: http://giacomino.com/category
 
 
 paths:
@@ -22,6 +26,9 @@ paths:
         "200":
           description: "hello world"
 
+#####################################
+####### User Endpoints ##############
+#####################################
   /users:
     get:
       tags:
@@ -79,15 +86,28 @@ paths:
         "500":
           $ref: "#/components/responses/error500"
 
-      parameters:
-        - $ref: "#/components/parameters/findById"
+#####################################
+####### Category Endpoints ##########
+#####################################
+
+  /category:
+    get:
+      tags:
+        - Category
+      summary: Gets all Category
+      description: Gets all categories present.
+      operationId: getCategory
+      x-spring-provide-args: [ '@org.springframework.security.core.annotation.AuthenticationPrincipal ApplicationUser applicationUser' ]
+      x-spring-paginated: true
       responses:
         "200":
           description: Successful operation
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/User"
+                type: array
+                items:
+                  $ref: "#/components/schemas/Category"
         "400":
           $ref: "#/components/responses/error400"
         "401":
@@ -99,6 +119,128 @@ paths:
         "500":
           $ref: "#/components/responses/error500"
 
+    post:
+      tags:
+        - Category
+      summary: Creates a category
+      description: Creates a new category.
+      operationId: createCategory
+      x-spring-provide-args: [ '@org.springframework.security.core.annotation.AuthenticationPrincipal ApplicationUser applicationUser' ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Category"
+      responses:
+        "201":
+          description: Category successfully created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Category"
+        "400":
+          $ref: "#/components/responses/error400"
+        "401":
+          $ref: "#/components/responses/error401"
+        "403":
+          $ref: "#/components/responses/error403"
+        "500":
+          $ref: "#/components/responses/error500"
+
+  /category/{id}:
+    get:
+      tags:
+        - Category
+      summary: Get Category with respective ID
+      description: Get category by his ID.
+      operationId: getCategoryId
+      x-spring-provide-args: [ '@org.springframework.security.core.annotation.AuthenticationPrincipal ApplicationUser applicationUser' ]
+      parameters:
+        - $ref: "#/components/parameters/findById"
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Category"
+        "400":
+          $ref: "#/components/responses/error400"
+        "401":
+          $ref: "#/components/responses/error401"
+        "403":
+          $ref: "#/components/responses/error403"
+        "404":
+          $ref: "#/components/responses/error404"
+        "500":
+          $ref: "#/components/responses/error500"
+
+    put:
+      tags:
+        - Category
+      summary: Updates a category
+      description: Updates an existing category.
+      operationId: updateCategory
+      x-spring-provide-args: [ '@org.springframework.security.core.annotation.AuthenticationPrincipal ApplicationUser applicationUser' ]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Category"
+      responses:
+        "200":
+          description: Category updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Category"
+        "400":
+          $ref: "#/components/responses/error400"
+        "401":
+          $ref: "#/components/responses/error401"
+        "403":
+          $ref: "#/components/responses/error403"
+        "404":
+          $ref: "#/components/responses/error404"
+        "500":
+          $ref: "#/components/responses/error500"
+
+    delete:
+      tags:
+        - Category
+      summary: Delete a category
+      description: Delete an existing category.
+      operationId: deleteCategory
+      x-spring-provide-args: [ '@org.springframework.security.core.annotation.AuthenticationPrincipal ApplicationUser applicationUser' ]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "204":
+          description: Category deleted successfully
+        "400":
+          $ref: "#/components/responses/error400"
+        "401":
+          $ref: "#/components/responses/error401"
+        "403":
+          $ref: "#/components/responses/error403"
+        "404":
+          $ref: "#/components/responses/error404"
+        "500":
+          $ref: "#/components/responses/error500"
 
 components:
   parameters:

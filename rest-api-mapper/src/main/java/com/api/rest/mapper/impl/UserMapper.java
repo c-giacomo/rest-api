@@ -1,4 +1,4 @@
-package com.api.rest.mapper.user;
+package com.api.rest.mapper.impl;
 
 import com.api.rest.mapper.BaseMapper;
 import com.api.rest.model.User;

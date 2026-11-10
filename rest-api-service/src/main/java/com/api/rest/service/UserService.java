@@ -1,10 +1,9 @@
-package com.api.rest.service.user;
+package com.api.rest.service;
 
-import com.api.rest.mapper.user.UserMapper;
+import com.api.rest.mapper.impl.UserMapper;
 import com.api.rest.model.User;
 import com.api.rest.orm.entities.UserEntity;
 import com.api.rest.orm.repositories.UserEntityRepository;
-import com.api.rest.service.AbstractService;
 import org.springframework.stereotype.Service;
 
 @Service

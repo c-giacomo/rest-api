@@ -14,25 +14,40 @@ import java.util.List;
  * @param <I> id of object to search
  * @param <R> repository
  * @param <M> mapper
- * @param <T> source type
- * @param <V> return type
+ * @param <E> entity type
+ * @param <D> dto type
  */
 
 @RequiredArgsConstructor
-public abstract class AbstractService<I, R extends JpaRepository<T, I>, M extends BaseMapper<T, V>, T, V> {
+public abstract class AbstractService<I, R extends JpaRepository<E, I>, M extends BaseMapper<E, D>, E, D> {
 
     protected final M mapper;
     protected final R repository;
 
-    public Page<V> findAll(Pageable pageable) {
+    public Page<D> findAll(Pageable pageable) {
         return repository.findAll(pageable).map(mapper::map);
     }
 
-    public List<V> findAll() {
+    public List<D> findAll() {
         return repository.findAll().stream().map(mapper::map).toList();
     }
 
-    public V findById(I id) {
+    public D findById(I id) {
         return repository.findById(id).map(mapper::map).orElseThrow(() -> new EntityNotFoundException("Entity not found with id: " + id));
+    }
+
+    public D create(D dto) {
+        E entity = mapper.mapReverse(dto);
+        return mapper.map(repository.save(entity));
+    }
+
+    public D update(I id, D dto) {
+        E entity = repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Entity not found with id: " + id));
+        mapper.mapReverse(dto, entity);
+        return mapper.map(repository.save(entity));
+    }
+
+    public void delete(I id) {
+        repository.deleteById(id);
     }
 }

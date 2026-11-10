@@ -2,7 +2,7 @@ package com.api.rest.web.resources.users.impl;
 
 import com.api.rest.model.User;
 import com.api.rest.service.security.ApplicationUser;
-import com.api.rest.service.user.UserService;
+import com.api.rest.service.UserService;
 import com.api.rest.web.resources.users.UsersApi;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -3,7 +3,7 @@ package com.api.rest.web.resources.users;
 import com.api.rest.RestMvcControllerTest;
 import com.api.rest.config.security.WithApplicationUser;
 import com.api.rest.model.User;
-import com.api.rest.service.user.UserService;
+import com.api.rest.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
