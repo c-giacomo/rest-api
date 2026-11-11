@@ -16,16 +16,20 @@ create table expense (
     description varchar(40),
     primary key (id)
 );
+create table expense_product (
+    expense_id bigint not null,
+    product_id bigint not null
+);
 create table product (
     price float(53),
-    category_id bigint not null unique,
-    expense_id bigint not null,
+    category_id bigint not null,
     id bigint not null,
     description varchar(40),
     name varchar(40),
     primary key (id)
 );
 
-alter table if exists expense add constraint fk_expense_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE;
-alter table if exists product add constraint fk_category_entity foreign key (category_id) references category;
-alter table if exists product add constraint fk_expense_entity foreign key (expense_id) references expense;
+alter table if exists expense add constraint fk_expense_user foreign key (user_id) references users on delete cascade;
+alter table if exists expense_product add constraint fk_expense_product_product foreign key (product_id) references product;
+alter table if exists expense_product add constraint fk_expense_product_expense foreign key (expense_id) references expense;
+alter table if exists product add constraint fk_product_category foreign key (category_id) references category;

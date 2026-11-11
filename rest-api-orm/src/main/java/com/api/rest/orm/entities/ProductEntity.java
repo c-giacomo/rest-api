@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
@@ -45,8 +46,12 @@ public class ProductEntity {
 
   private Double price;
 
-  @OneToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "category_id", nullable = false, unique = true, foreignKey = @ForeignKey(name = "fk_category_entity"))
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(
+          name = "category_id",
+          nullable = false,
+          foreignKey = @ForeignKey(name = "fk_product_category")
+  )
   private CategoryEntity type;
 
 

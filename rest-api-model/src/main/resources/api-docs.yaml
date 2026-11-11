@@ -12,6 +12,10 @@ tags:
     description: Operation concerning Categories
     externalDocs:
       url: http://giacomino.com/category
+  - name: Product
+    description: Operation concerning Products
+    externalDocs:
+      url: http://giacomino.com/product
 
 
 paths:
@@ -231,6 +235,201 @@ paths:
       responses:
         "204":
           description: Category deleted successfully
+        "400":
+          $ref: "#/components/responses/error400"
+        "401":
+          $ref: "#/components/responses/error401"
+        "403":
+          $ref: "#/components/responses/error403"
+        "404":
+          $ref: "#/components/responses/error404"
+        "500":
+          $ref: "#/components/responses/error500"
+
+  #####################################
+  ####### Product Endpoints ###########
+  #####################################
+
+  /product:
+    get:
+      tags:
+        - Product
+      summary: Gets all Products
+      description: Gets all products present.
+      operationId: getProduct
+      x-spring-provide-args: [ '@org.springframework.security.core.annotation.AuthenticationPrincipal ApplicationUser applicationUser' ]
+      x-spring-paginated: true
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Product"
+        "400":
+          $ref: "#/components/responses/error400"
+        "401":
+          $ref: "#/components/responses/error401"
+        "403":
+          $ref: "#/components/responses/error403"
+        "404":
+          $ref: "#/components/responses/error404"
+        "500":
+          $ref: "#/components/responses/error500"
+
+    post:
+      tags:
+        - Product
+      summary: Creates a product
+      description: Creates a new product.
+      operationId: createProduct
+      x-spring-provide-args: [ '@org.springframework.security.core.annotation.AuthenticationPrincipal ApplicationUser applicationUser' ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Product"
+      responses:
+        "201":
+          description: Product successfully created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+        "400":
+          $ref: "#/components/responses/error400"
+        "401":
+          $ref: "#/components/responses/error401"
+        "403":
+          $ref: "#/components/responses/error403"
+        "500":
+          $ref: "#/components/responses/error500"
+
+  /product/{id}:
+    get:
+      tags:
+        - Product
+      summary: Get Product with respective ID
+      description: Get product by his ID.
+      operationId: getProductId
+      x-spring-provide-args: [ '@org.springframework.security.core.annotation.AuthenticationPrincipal ApplicationUser applicationUser' ]
+      parameters:
+        - $ref: "#/components/parameters/findById"
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+        "400":
+          $ref: "#/components/responses/error400"
+        "401":
+          $ref: "#/components/responses/error401"
+        "403":
+          $ref: "#/components/responses/error403"
+        "404":
+          $ref: "#/components/responses/error404"
+        "500":
+          $ref: "#/components/responses/error500"
+
+    put:
+      tags:
+        - Product
+      summary: Updates a product
+      description: Updates an existing product.
+      operationId: updateProduct
+      x-spring-provide-args: [ '@org.springframework.security.core.annotation.AuthenticationPrincipal ApplicationUser applicationUser' ]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Product"
+      responses:
+        "200":
+          description: Product updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+        "400":
+          $ref: "#/components/responses/error400"
+        "401":
+          $ref: "#/components/responses/error401"
+        "403":
+          $ref: "#/components/responses/error403"
+        "404":
+          $ref: "#/components/responses/error404"
+        "500":
+          $ref: "#/components/responses/error500"
+
+  /product/switch/category:
+    put:
+      tags:
+        - Product
+      summary: Updates a product category
+      description: Updates an existing product category.
+      operationId: updateProductCategory
+      x-spring-provide-args: [ '@org.springframework.security.core.annotation.AuthenticationPrincipal ApplicationUser applicationUser' ]
+      parameters:
+        - name: product_id
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: category_id
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: Product category updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+        "400":
+          $ref: "#/components/responses/error400"
+        "401":
+          $ref: "#/components/responses/error401"
+        "403":
+          $ref: "#/components/responses/error403"
+        "404":
+          $ref: "#/components/responses/error404"
+        "500":
+          $ref: "#/components/responses/error500"
+
+    delete:
+      tags:
+        - Product
+      summary: Delete a product
+      description: Delete an existing product.
+      operationId: deleteProduct
+      x-spring-provide-args: [ '@org.springframework.security.core.annotation.AuthenticationPrincipal ApplicationUser applicationUser' ]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "204":
+          description: Product deleted successfully
         "400":
           $ref: "#/components/responses/error400"
         "401":

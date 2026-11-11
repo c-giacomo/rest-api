@@ -49,9 +49,9 @@
                             <modelPackage>model</modelPackage>
                             <generateSupportingFiles>false</generateSupportingFiles>
                             <templateResourcePath>${project.basedir}/src/template</templateResourcePath>
-                            <apisToGenerate>example</apisToGenerate>
+                            <apisToGenerate>product</apisToGenerate>
                             <modelsToGenerate>User</modelsToGenerate>
-                            <skip>true</skip>
+                            <skip>false</skip>
                             <schemaMappings>
                                 <schemaMapping>
                                     ProblemDetail=org.springframework.http.ProblemDetail

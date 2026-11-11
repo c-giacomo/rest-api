@@ -8,14 +8,16 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.OffsetDateTime;
@@ -51,18 +53,28 @@ public class ExpenseEntity {
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
   private OffsetDateTime date;
 
-  @OneToMany(fetch = FetchType.LAZY)
-  @JoinColumn(name = "expense_id", nullable = false, foreignKey = @ForeignKey(name = "fk_expense_entity"))
+  @ManyToMany(fetch = FetchType.LAZY)
+  @JoinTable(
+          name = "expense_product",
+          joinColumns = @JoinColumn(
+                  name = "expense_id",
+                  foreignKey = @ForeignKey(name = "fk_expense_product_expense")
+          ),
+          inverseJoinColumns = @JoinColumn(
+                  name = "product_id",
+                  foreignKey = @ForeignKey(name = "fk_expense_product_product")
+          )
+  )
   private List<ProductEntity> product = new ArrayList<>();
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "user_id",
-              nullable = false,
-              foreignKey = @ForeignKey(
-                      name = "fk_expense_user",
-                      foreignKeyDefinition = "FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE")
+  @JoinColumn(
+          name = "user_id",
+          nullable = false,
+          foreignKey = @ForeignKey(name = "fk_expense_user")
   )
-  private @Valid UserEntity user;
+  @OnDelete(action = OnDeleteAction.CASCADE)
+  private UserEntity user;
 
 
   

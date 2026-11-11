@@ -12,5 +12,4 @@ public class UserService extends AbstractService<Long, UserEntityRepository, Use
     public UserService(UserMapper mapper, UserEntityRepository repository) {
         super(mapper, repository);
     }
-
 }
