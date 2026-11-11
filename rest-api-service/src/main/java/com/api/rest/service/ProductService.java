@@ -4,8 +4,8 @@ import com.api.rest.mapper.impl.ProductMapper;
 import com.api.rest.model.Product;
 import com.api.rest.orm.entities.CategoryEntity;
 import com.api.rest.orm.entities.ProductEntity;
-import com.api.rest.orm.repositories.CategoryEntityRepository;
-import com.api.rest.orm.repositories.ProductEntityRepository;
+import com.api.rest.orm.repositories.CategoryRepository;
+import com.api.rest.orm.repositories.ProductRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,13 +13,13 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Objects;
 
 @Service
-public class ProductService extends AbstractService<Long, ProductEntityRepository, ProductMapper, ProductEntity, Product> {
+public class ProductService extends AbstractService<Long, ProductRepository, ProductMapper, ProductEntity, Product> {
 
-    private final CategoryEntityRepository categoryEntityRepository;
+    private final CategoryRepository categoryRepository;
 
-    public ProductService(ProductMapper mapper, ProductEntityRepository repository, CategoryEntityRepository categoryEntityRepository) {
+    public ProductService(ProductMapper mapper, ProductRepository repository, CategoryRepository categoryRepository) {
         super(mapper, repository);
-        this.categoryEntityRepository = categoryEntityRepository;
+        this.categoryRepository = categoryRepository;
     }
 
     @Override
@@ -29,7 +29,7 @@ public class ProductService extends AbstractService<Long, ProductEntityRepositor
                 "Category id cannot be null."
         );
 
-        CategoryEntity category = categoryEntityRepository.findById(categoryId)
+        CategoryEntity category = categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new EntityNotFoundException(
                         "Category with id " + categoryId + " not found."
                 ));
@@ -43,7 +43,7 @@ public class ProductService extends AbstractService<Long, ProductEntityRepositor
         ProductEntity productEntity = repository.findById(productId)
                 .orElseThrow(() -> new EntityNotFoundException("Product with id " + productId + " not found."));
 
-        CategoryEntity categoryEntity = categoryEntityRepository.findById(categoryId)
+        CategoryEntity categoryEntity = categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new EntityNotFoundException("Category with id " + categoryId + " not found."));
 
         productEntity.setType(categoryEntity);

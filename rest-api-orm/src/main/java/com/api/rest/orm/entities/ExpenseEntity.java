@@ -1,6 +1,7 @@
 package com.api.rest.orm.entities;
 
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.ForeignKey;
@@ -8,9 +9,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Size;
@@ -21,9 +21,9 @@ import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
 * Expense
@@ -53,19 +53,12 @@ public class ExpenseEntity {
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
   private OffsetDateTime date;
 
-  @ManyToMany(fetch = FetchType.LAZY)
-  @JoinTable(
-          name = "expense_product",
-          joinColumns = @JoinColumn(
-                  name = "expense_id",
-                  foreignKey = @ForeignKey(name = "fk_expense_product_expense")
-          ),
-          inverseJoinColumns = @JoinColumn(
-                  name = "product_id",
-                  foreignKey = @ForeignKey(name = "fk_expense_product_product")
-          )
+  @OneToMany(
+          mappedBy = "expense",
+          cascade = CascadeType.ALL,
+          orphanRemoval = true
   )
-  private List<ProductEntity> product = new ArrayList<>();
+  private Set<ExpenseProductEntity> expenseProducts = new HashSet<>();
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(
@@ -91,13 +84,13 @@ public class ExpenseEntity {
         Objects.equals(this.description, expense.description) &&
         Objects.equals(this.amount, expense.amount) &&
         Objects.equals(this.date, expense.date) &&
-        Objects.equals(this.product, expense.product) &&
+        Objects.equals(this.expenseProducts, expense.expenseProducts) &&
         Objects.equals(this.user, expense.user);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, description, amount, date, product, user);
+    return Objects.hash(id, description, amount, date, expenseProducts, user);
   }
 
   @Override
@@ -107,7 +100,7 @@ public class ExpenseEntity {
     "    description: " + toIndentedString(description) + "\n" +
     "    amount: " + toIndentedString(amount) + "\n" +
     "    date: " + toIndentedString(date) + "\n" +
-    "    product: " + toIndentedString(product) + "\n" +
+    "    expenseProducts: " + toIndentedString(expenseProducts) + "\n" +
     "    user: " + toIndentedString(user) + "\n" +
      "}";
   }

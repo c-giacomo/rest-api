@@ -49,6 +49,8 @@ server:
   port: 8080
   servlet:
     context-path: /REST-API
+    session:
+      persistent: false
   shutdown: graceful
 
 springdoc:

@@ -1,6 +1,6 @@
 package com.api.rest.service.security;
 
-import com.api.rest.orm.repositories.UserEntityRepository;
+import com.api.rest.orm.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.jspecify.annotations.NonNull;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class DatabaseUserDetailsService implements UserDetailsService {
 
-    private final UserEntityRepository repository;
+    private final UserRepository repository;
 
     @Override
     @Transactional(readOnly = true)

@@ -3,7 +3,7 @@ package com.api.rest.service.user;
 import com.api.rest.mapper.impl.UserMapper;
 import com.api.rest.model.User;
 import com.api.rest.orm.entities.UserEntity;
-import com.api.rest.orm.repositories.UserEntityRepository;
+import com.api.rest.orm.repositories.UserRepository;
 import com.api.rest.service.UserService;
 import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
@@ -24,7 +24,7 @@ import static org.mockito.BDDMockito.given;
 public class UserServiceTest {
 
     @Mock
-    private UserEntityRepository userEntityRepository;
+    private UserRepository userRepository;
 
     @InjectMocks
     private UserService userService;
@@ -32,7 +32,7 @@ public class UserServiceTest {
     @BeforeEach
     void setUp() {
         UserMapper userMapper = Mappers.getMapper(UserMapper.class);
-        userService = new UserService(userMapper, userEntityRepository);
+        userService = new UserService(userMapper, userRepository);
     }
 
     @Test
@@ -41,7 +41,7 @@ public class UserServiceTest {
         user.setId(1L);
         user.setName("Giacomo");
 
-        given(userEntityRepository.findById(1L))
+        given(userRepository.findById(1L))
                 .willReturn(Optional.of(user));
 
         User result = userService.findById(1L);
@@ -51,7 +51,7 @@ public class UserServiceTest {
 
     @Test
     void shouldThrowExceptionWhenUserDoesNotExist() {
-        given(userEntityRepository.findById(1L))
+        given(userRepository.findById(1L))
                 .willReturn(Optional.empty());
 
         assertThatThrownBy(() -> userService.findById(1L))
