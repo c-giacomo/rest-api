@@ -14,6 +14,8 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Objects;
+
 /**
  * ExpenseProduct
  */
@@ -50,4 +52,37 @@ public class ExpenseProductEntity {
 
     @Column(nullable = false)
     private Integer quantity;
+
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        ExpenseProductEntity that = (ExpenseProductEntity) o;
+        return Objects.equals(id, that.id) && Objects.equals(quantity, that.quantity);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, quantity);
+    }
+
+    @Override
+    public String toString() {
+        return "class ExpenseProductEntity {\n" +
+                "    id: " + toIndentedString(id) + "\n" +
+                "    quantity: " + toIndentedString(quantity) + "\n" +
+                "}";
+    }
+
+    /**
+     * Convert the given object to string with each line indented by 4 spaces
+     * (except the first line).
+     */
+    private String toIndentedString(Object o) {
+        if (o == null) {
+            return "null";
+        }
+        return o.toString().replace("\n", "\n    ");
+    }
 }

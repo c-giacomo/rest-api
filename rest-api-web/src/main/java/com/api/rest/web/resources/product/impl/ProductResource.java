@@ -22,12 +22,12 @@ public class ProductResource implements ProductApi {
 
     @Override
     public ResponseEntity<Product> createProduct(Product product, @AuthenticationPrincipal ApplicationUser applicationUser) {
-        return new ResponseEntity<>(productService.create(product), HttpStatus.CREATED);
+        return new ResponseEntity<>(productService.create(product, applicationUser), HttpStatus.CREATED);
     }
 
     @Override
     public ResponseEntity<Void> deleteProduct(Long id, @AuthenticationPrincipal ApplicationUser applicationUser) {
-        productService.delete(id);
+        productService.delete(id, applicationUser);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

@@ -20,6 +20,10 @@ tags:
     description: Operation concerning Expenses
     externalDocs:
       url: http://giacomino.com/expense
+  - name: ExpenseDetail
+    description: Operation concerning Expense Details
+    externalDocs:
+      url: http://giacomino.com/expense-detail
 
 
 paths:
@@ -250,10 +254,9 @@ paths:
         "500":
           $ref: "#/components/responses/error500"
 
-  #####################################
-  ####### Product Endpoints ###########
-  #####################################
-
+#####################################
+####### Product Endpoints ###########
+#####################################
   /product:
     get:
       tags:
@@ -445,35 +448,10 @@ paths:
         "500":
           $ref: "#/components/responses/error500"
 
+#####################################
+####### Expense Endpoints ###########
+#####################################
   /expense:
-    get:
-      tags:
-        - Expense
-      summary: Gets all Expenses
-      description: Gets all expenses present.
-      operationId: getExpense
-      x-spring-provide-args: [ '@org.springframework.security.core.annotation.AuthenticationPrincipal ApplicationUser applicationUser' ]
-      x-spring-paginated: true
-      responses:
-        "200":
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Expense"
-        "400":
-          $ref: "#/components/responses/error400"
-        "401":
-          $ref: "#/components/responses/error401"
-        "403":
-          $ref: "#/components/responses/error403"
-        "404":
-          $ref: "#/components/responses/error404"
-        "500":
-          $ref: "#/components/responses/error500"
-
     post:
         tags:
           - Expense
@@ -502,15 +480,75 @@ paths:
               $ref: "#/components/responses/error403"
             "500":
               $ref: "#/components/responses/error500"
+    delete:
+        tags:
+          - Expense
+        summary: Delete an expense
+        description: Delete an existing expense.
+        operationId: deleteExpense
+        x-spring-provide-args: [ '@org.springframework.security.core.annotation.AuthenticationPrincipal ApplicationUser applicationUser' ]
+        parameters:
+          - name: id
+            in: query
+            required: true
+            schema:
+              type: integer
+              format: int64
+        responses:
+          "204":
+            description: Expense deleted successfully
+          "400":
+            $ref: "#/components/responses/error400"
+          "401":
+            $ref: "#/components/responses/error401"
+          "403":
+            $ref: "#/components/responses/error403"
+          "404":
+            $ref: "#/components/responses/error404"
+          "500":
+            $ref: "#/components/responses/error500"
 
-  /expense/{id}:
+  #####################################
+  ####### Expense Detail Endpoints ####
+  #####################################
+  /expense/detail:
     get:
       tags:
-        - Expense
-      summary: Get Expense with respective ID
-      description: Get expense by his ID.
-      operationId: getExpenseId
+        - ExpenseDetail
+      summary: Gets all Expense Details
+      description: Gets all expense details present.
+      operationId: getExpenseDetail
       x-spring-provide-args: [ '@org.springframework.security.core.annotation.AuthenticationPrincipal ApplicationUser applicationUser' ]
+      x-spring-paginated: true
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ExpenseDetail"
+        "400":
+          $ref: "#/components/responses/error400"
+        "401":
+          $ref: "#/components/responses/error401"
+        "403":
+          $ref: "#/components/responses/error403"
+        "404":
+          $ref: "#/components/responses/error404"
+        "500":
+          $ref: "#/components/responses/error500"
+
+  /expense/detail/{id}:
+    get:
+      tags:
+        - ExpenseDetail
+      summary: Gets an Expense Detail by ID
+      description: Gets an expense detail by its ID.
+      operationId: getExpenseDetail
+      x-spring-provide-args: [ '@org.springframework.security.core.annotation.AuthenticationPrincipal ApplicationUser applicationUser' ]
+      x-spring-paginated: true
       parameters:
         - $ref: "#/components/parameters/findById"
       responses:
@@ -519,7 +557,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Expense"
+                type: array
+                items:
+                  $ref: "#/components/schemas/ExpenseDetail"
         "400":
           $ref: "#/components/responses/error400"
         "401":
@@ -685,6 +725,32 @@ components:
           format: double
         type:
           $ref: "#/components/schemas/Category"
+
+    ExpenseDetail:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        description:
+          type: string
+          minLength: 3
+          maxLength: 40
+        amount:
+          type: number
+          format: double
+        date:
+          type: string
+          format: date-time
+        product:
+          type: string
+          minLength: 2
+          maxLength: 40
+        unitPrice:
+          type: number
+          format: double
+        user:
+          $ref: "#/components/schemas/User"
 
     ProblemDetail:
       type: object

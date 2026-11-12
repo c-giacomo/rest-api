@@ -22,13 +22,13 @@ public class CategoryResource implements CategoryApi {
 
     @Override
     public ResponseEntity<Category> createCategory(Category category, @AuthenticationPrincipal ApplicationUser applicationUser) {
-        Category result = categoryService.create(category);
+        Category result = categoryService.create(category, applicationUser);
         return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
 
     @Override
     public ResponseEntity<Void> deleteCategory(Long id, @AuthenticationPrincipal ApplicationUser applicationUser) {
-        categoryService.delete(id);
+        categoryService.delete(id, applicationUser);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

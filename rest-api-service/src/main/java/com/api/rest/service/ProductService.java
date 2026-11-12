@@ -23,7 +23,7 @@ public class ProductService extends AbstractService<Long, ProductRepository, Pro
     }
 
     @Override
-    public ProductEntity enrich(ProductEntity entity, Product product) {
+    public ProductEntity enrich(ProductEntity entity, Product product, Object principal) {
         Long categoryId = Objects.requireNonNull(
                 product.getType().getId(),
                 "Category id cannot be null."

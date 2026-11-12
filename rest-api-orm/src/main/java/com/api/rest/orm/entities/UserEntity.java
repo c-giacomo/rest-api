@@ -102,7 +102,6 @@ public class UserEntity implements Serializable {
                 ", surname='" + surname + '\'' +
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
-                ", roles=" + roles.stream().peek(System.out::print).collect(Collectors.joining(";")) +
                 '}';
     }
 }

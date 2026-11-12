@@ -83,9 +83,7 @@ public class ExpenseEntity {
     return Objects.equals(this.id, expense.id) &&
         Objects.equals(this.description, expense.description) &&
         Objects.equals(this.amount, expense.amount) &&
-        Objects.equals(this.date, expense.date) &&
-        Objects.equals(this.expenseProducts, expense.expenseProducts) &&
-        Objects.equals(this.user, expense.user);
+        Objects.equals(this.date, expense.date);
   }
 
   @Override
@@ -100,8 +98,6 @@ public class ExpenseEntity {
     "    description: " + toIndentedString(description) + "\n" +
     "    amount: " + toIndentedString(amount) + "\n" +
     "    date: " + toIndentedString(date) + "\n" +
-    "    expenseProducts: " + toIndentedString(expenseProducts) + "\n" +
-    "    user: " + toIndentedString(user) + "\n" +
      "}";
   }
 

@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -41,9 +42,9 @@ public abstract class AbstractService<I, R extends JpaRepository<E, I>, M extend
     }
 
     @Transactional
-    public D create(D dto) {
+    public D create(D dto, @AuthenticationPrincipal Object principal) {
         E entity = mapper.mapReverse(dto);
-        entity = enrich(entity, dto);
+        entity = enrich(entity, dto, principal);
         return mapper.map(repository.save(entity));
     }
 
@@ -55,7 +56,7 @@ public abstract class AbstractService<I, R extends JpaRepository<E, I>, M extend
     }
 
     @Transactional
-    public void delete(I id) {
+    public void delete(I id, @AuthenticationPrincipal Object principal) {
         repository.deleteById(id);
     }
 
@@ -69,7 +70,7 @@ public abstract class AbstractService<I, R extends JpaRepository<E, I>, M extend
      * @param dto the DTO containing the data used to enrich the entity
      * @return the enriched entity
      */
-    public E enrich(E entity, D dto) {
+    public E enrich(E entity, D dto, Object principal) {
         return entity;
     }
 }

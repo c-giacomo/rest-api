@@ -47,8 +47,7 @@ public class Product {
     return Objects.equals(this.id, product.id) &&
         Objects.equals(this.name, product.name) &&
         Objects.equals(this.description, product.description) &&
-        Objects.equals(this.price, product.price) &&
-        Objects.equals(this.type, product.type);
+        Objects.equals(this.price, product.price);
   }
 
   @Override
@@ -63,7 +62,6 @@ public class Product {
     "    name: " + toIndentedString(name) + "\n" +
     "    description: " + toIndentedString(description) + "\n" +
     "    price: " + toIndentedString(price) + "\n" +
-    "    type: " + toIndentedString(type) + "\n" +
      "}";
   }
 

@@ -5,23 +5,19 @@
  */
 package com.api.rest.web.resources.expense;
 
+
 import com.api.rest.model.Expense;
 import com.api.rest.service.security.ApplicationUser;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
-import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Generated;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
-import org.springdoc.core.annotations.ParameterObject;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
@@ -29,10 +25,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
-
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-11-11T15:48:26.003603+01:00[Europe/Rome]", comments = "Generator version: 7.16.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-11-12T09:41:26.969342400+01:00[Europe/Rome]", comments = "Generator version: 7.16.0")
 @Validated
 @Tag(name = "Expense", description = "Operation concerning Expenses")
 @RequestMapping("${openapi.exampleRestArchetype.base-path:}")
@@ -85,12 +80,13 @@ public interface ExpenseApi {
     );
 
 
-    String PATH_GET_EXPENSE = "/expense";
+    String PATH_DELETE_EXPENSE = "/expense";
     /**
-     * GET /expense : Gets all Expenses
-     * Gets all expenses present.
+     * DELETE /expense : Delete an expense
+     * Delete an existing expense.
      *
-     * @return Successful operation (status code 200)
+     * @param id  (required)
+     * @return Expense deleted successfully (status code 204)
      *         or Bad Request (status code 400)
      *         or Unauthorized (status code 401)
      *         or Forbidden (status code 403)
@@ -98,14 +94,12 @@ public interface ExpenseApi {
      *         or Internal Server Error (status code 500)
      */
     @Operation(
-        operationId = "getExpense",
-        summary = "Gets all Expenses",
-        description = "Gets all expenses present.",
+        operationId = "deleteExpense",
+        summary = "Delete an expense",
+        description = "Delete an existing expense.",
         tags = { "Expense" },
         responses = {
-            @ApiResponse(responseCode = "200", description = "Successful operation", content = {
-                @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = Expense.class)))
-            }),
+            @ApiResponse(responseCode = "204", description = "Expense deleted successfully"),
             @ApiResponse(responseCode = "400", description = "Bad Request", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = org.springframework.http.ProblemDetail.class))
             }),
@@ -124,64 +118,13 @@ public interface ExpenseApi {
         }
     )
     @RequestMapping(
-        method = RequestMethod.GET,
-        value = ExpenseApi.PATH_GET_EXPENSE,
+        method = RequestMethod.DELETE,
+        value = ExpenseApi.PATH_DELETE_EXPENSE,
         produces = { "application/json" }
     )
     
-    ResponseEntity<Page<Expense>> getExpense(
-            @ParameterObject final Pageable pageable,
-            @Parameter(hidden = true) @AuthenticationPrincipal ApplicationUser applicationUser
-    );
-
-
-    String PATH_GET_EXPENSE_ID = "/expense/{id}";
-    /**
-     * GET /expense/{id} : Get Expense with respective ID
-     * Get expense by his ID.
-     *
-     * @param id The ID of object to be returned (required)
-     * @return Successful operation (status code 200)
-     *         or Bad Request (status code 400)
-     *         or Unauthorized (status code 401)
-     *         or Forbidden (status code 403)
-     *         or Not Found (status code 404)
-     *         or Internal Server Error (status code 500)
-     */
-    @Operation(
-        operationId = "getExpenseId",
-        summary = "Get Expense with respective ID",
-        description = "Get expense by his ID.",
-        tags = { "Expense" },
-        responses = {
-            @ApiResponse(responseCode = "200", description = "Successful operation", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = Expense.class))
-            }),
-            @ApiResponse(responseCode = "400", description = "Bad Request", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = org.springframework.http.ProblemDetail.class))
-            }),
-            @ApiResponse(responseCode = "401", description = "Unauthorized", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = org.springframework.http.ProblemDetail.class))
-            }),
-            @ApiResponse(responseCode = "403", description = "Forbidden", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = org.springframework.http.ProblemDetail.class))
-            }),
-            @ApiResponse(responseCode = "404", description = "Not Found", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = org.springframework.http.ProblemDetail.class))
-            }),
-            @ApiResponse(responseCode = "500", description = "Internal Server Error", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = org.springframework.http.ProblemDetail.class))
-            })
-        }
-    )
-    @RequestMapping(
-        method = RequestMethod.GET,
-        value = ExpenseApi.PATH_GET_EXPENSE_ID,
-        produces = { "application/json" }
-    )
-    
-    ResponseEntity<Expense> getExpenseId(
-            @PathVariable @NotNull @Min(0L) @Parameter(name = "id", description = "The ID of object to be returned", required = true, in = ParameterIn.PATH) Long id,
+    ResponseEntity<Void> deleteExpense(
+            @NotNull @Parameter(name = "id", description = "", required = true, in = ParameterIn.QUERY) @Valid @RequestParam Long id,
             @Parameter(hidden = true) @AuthenticationPrincipal ApplicationUser applicationUser
     );
 
