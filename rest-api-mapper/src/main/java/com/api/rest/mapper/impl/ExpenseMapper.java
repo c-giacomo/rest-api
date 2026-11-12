@@ -21,7 +21,14 @@ public interface ExpenseMapper extends BaseMapper<ExpenseEntity, Expense> {
     Expense map(ExpenseEntity entity);
 
     default Product map(ExpenseProductEntity entity) {
-        return entity == null ? null : map(entity.getProduct());
+        if (entity == null) {
+            return null;
+        }
+
+        Product product = map(entity.getProduct());
+        product.setQuantity(entity.getQuantity());
+
+        return product;
     }
 
     Product map(ProductEntity entity);

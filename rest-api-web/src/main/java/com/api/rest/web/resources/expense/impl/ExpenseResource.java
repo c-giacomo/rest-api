@@ -33,12 +33,12 @@ public class ExpenseResource implements ExpenseApi {
 
     @Override
     public ResponseEntity<Expense> getExpenseById(Long id, @AuthenticationPrincipal ApplicationUser applicationUser) {
-        return null;
+        return new ResponseEntity<>(expenseService.findById(id, applicationUser), HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity<Page<Expense>> getExpenses(Pageable pageable, @AuthenticationPrincipal ApplicationUser applicationUser) {
-        return null;
+        return new ResponseEntity<>(expenseService.findAll(pageable, applicationUser), HttpStatus.OK);
     }
 
 }

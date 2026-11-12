@@ -32,6 +32,9 @@ public class Product {
   @JsonProperty("price")  
   private Double price;
 
+  @JsonProperty("quantity")
+  private Integer quantity = null;
+
   @JsonProperty("type")
   private @Valid Category type;
   
