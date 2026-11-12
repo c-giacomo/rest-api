@@ -10,9 +10,12 @@ import com.api.rest.orm.repositories.ExpenseRepository;
 import com.api.rest.orm.repositories.ProductRepository;
 import com.api.rest.orm.repositories.UserRepository;
 import com.api.rest.service.security.ApplicationUser;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;

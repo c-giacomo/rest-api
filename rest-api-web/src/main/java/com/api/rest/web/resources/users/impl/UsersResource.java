@@ -22,11 +22,11 @@ public class UsersResource implements UsersApi {
 
     @Override
     public ResponseEntity<User> getUserId(Long id, @AuthenticationPrincipal ApplicationUser applicationUser) {
-        return new ResponseEntity<>(userService.findById(id), HttpStatus.OK);
+        return new ResponseEntity<>(userService.findById(id, applicationUser), HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity<Page<User>> getUsers(Pageable pageable, @AuthenticationPrincipal ApplicationUser applicationUser) {
-        return new ResponseEntity<>(userService.findAll(pageable), HttpStatus.OK);
+        return new ResponseEntity<>(userService.findAll(pageable, applicationUser), HttpStatus.OK);
     }
 }

@@ -11,13 +11,18 @@ import com.api.rest.service.security.ApplicationUser;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Generated;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import org.springdoc.core.annotations.ParameterObject;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
@@ -125,6 +130,106 @@ public interface ExpenseApi {
     
     ResponseEntity<Void> deleteExpense(
             @NotNull @Parameter(name = "id", description = "", required = true, in = ParameterIn.QUERY) @Valid @RequestParam Long id,
+            @Parameter(hidden = true) @AuthenticationPrincipal ApplicationUser applicationUser
+    );
+
+    public static final String PATH_GET_EXPENSE_BY_ID = "/expense/{id}";
+    /**
+     * GET /expense/{id} : Get Expense with respective ID
+     * Get expense by his ID.
+     *
+     * @param id The ID of object to be returned (required)
+     * @return Successful operation (status code 200)
+     *         or Bad Request (status code 400)
+     *         or Unauthorized (status code 401)
+     *         or Forbidden (status code 403)
+     *         or Not Found (status code 404)
+     *         or Internal Server Error (status code 500)
+     */
+    @Operation(
+            operationId = "getExpenseById",
+            summary = "Get Expense with respective ID",
+            description = "Get expense by his ID.",
+            tags = { "Expense" },
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Successful operation", content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = Expense.class))
+                    }),
+                    @ApiResponse(responseCode = "400", description = "Bad Request", content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = org.springframework.http.ProblemDetail.class))
+                    }),
+                    @ApiResponse(responseCode = "401", description = "Unauthorized", content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = org.springframework.http.ProblemDetail.class))
+                    }),
+                    @ApiResponse(responseCode = "403", description = "Forbidden", content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = org.springframework.http.ProblemDetail.class))
+                    }),
+                    @ApiResponse(responseCode = "404", description = "Not Found", content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = org.springframework.http.ProblemDetail.class))
+                    }),
+                    @ApiResponse(responseCode = "500", description = "Internal Server Error", content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = org.springframework.http.ProblemDetail.class))
+                    })
+            }
+    )
+    @RequestMapping(
+            method = RequestMethod.GET,
+            value = ExpenseApi.PATH_GET_EXPENSE_BY_ID,
+            produces = { "application/json" }
+    )
+
+    ResponseEntity<Expense> getExpenseById(
+            @PathVariable @NotNull @Min(0L) @Parameter(name = "id", description = "The ID of object to be returned", required = true, in = ParameterIn.PATH) Long id,
+            @Parameter(hidden = true) @AuthenticationPrincipal ApplicationUser applicationUser
+    );
+
+
+    String PATH_GET_EXPENSES = "/expense";
+    /**
+     * GET /expense : Gets all Expenses
+     * Gets all expenses present.
+     *
+     * @return Successful operation (status code 200)
+     *         or Bad Request (status code 400)
+     *         or Unauthorized (status code 401)
+     *         or Forbidden (status code 403)
+     *         or Not Found (status code 404)
+     *         or Internal Server Error (status code 500)
+     */
+    @Operation(
+            operationId = "getExpenses",
+            summary = "Gets all Expenses",
+            description = "Gets all expenses present.",
+            tags = { "Expense" },
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Successful operation", content = {
+                            @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = Expense.class)))
+                    }),
+                    @ApiResponse(responseCode = "400", description = "Bad Request", content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = org.springframework.http.ProblemDetail.class))
+                    }),
+                    @ApiResponse(responseCode = "401", description = "Unauthorized", content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = org.springframework.http.ProblemDetail.class))
+                    }),
+                    @ApiResponse(responseCode = "403", description = "Forbidden", content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = org.springframework.http.ProblemDetail.class))
+                    }),
+                    @ApiResponse(responseCode = "404", description = "Not Found", content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = org.springframework.http.ProblemDetail.class))
+                    }),
+                    @ApiResponse(responseCode = "500", description = "Internal Server Error", content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = org.springframework.http.ProblemDetail.class))
+                    })
+            }
+    )
+    @RequestMapping(
+            method = RequestMethod.GET,
+            value = ExpenseApi.PATH_GET_EXPENSES,
+            produces = { "application/json" }
+    )
+
+    ResponseEntity<Page<Expense>> getExpenses(
+            @ParameterObject final Pageable pageable,
             @Parameter(hidden = true) @AuthenticationPrincipal ApplicationUser applicationUser
     );
 

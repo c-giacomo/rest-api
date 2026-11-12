@@ -6,6 +6,8 @@ import com.api.rest.service.security.ApplicationUser;
 import com.api.rest.web.resources.expense.ExpenseApi;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -27,6 +29,16 @@ public class ExpenseResource implements ExpenseApi {
     public ResponseEntity<Void> deleteExpense(Long id, @AuthenticationPrincipal ApplicationUser applicationUser) {
         expenseService.delete(id, applicationUser);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @Override
+    public ResponseEntity<Expense> getExpenseById(Long id, @AuthenticationPrincipal ApplicationUser applicationUser) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<Page<Expense>> getExpenses(Pageable pageable, @AuthenticationPrincipal ApplicationUser applicationUser) {
+        return null;
     }
 
 }

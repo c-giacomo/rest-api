@@ -5,6 +5,7 @@ import com.api.rest.model.User;
 import com.api.rest.orm.entities.UserEntity;
 import com.api.rest.orm.repositories.UserRepository;
 import com.api.rest.service.UserService;
+import com.api.rest.service.security.ApplicationUser;
 import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,6 +19,7 @@ import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.BDDMockito.given;
 
 @ExtendWith(MockitoExtension.class)
@@ -44,7 +46,7 @@ public class UserServiceTest {
         given(userRepository.findById(1L))
                 .willReturn(Optional.of(user));
 
-        User result = userService.findById(1L);
+        User result = userService.findById(1L, isA(ApplicationUser.class));
 
         assertThat(result.getName()).isEqualTo("Giacomo");
     }
@@ -54,7 +56,7 @@ public class UserServiceTest {
         given(userRepository.findById(1L))
                 .willReturn(Optional.empty());
 
-        assertThatThrownBy(() -> userService.findById(1L))
+        assertThatThrownBy(() -> userService.findById(1L, isA(ApplicationUser.class)))
                 .isInstanceOf(EntityNotFoundException.class)
                 .hasMessage("Entity not found with id: 1");
     }

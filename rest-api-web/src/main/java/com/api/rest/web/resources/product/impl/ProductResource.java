@@ -33,12 +33,12 @@ public class ProductResource implements ProductApi {
 
     @Override
     public ResponseEntity<Page<Product>> getProduct(Pageable pageable, @AuthenticationPrincipal ApplicationUser applicationUser) {
-        return new ResponseEntity<>(productService.findAll(pageable), HttpStatus.OK);
+        return new ResponseEntity<>(productService.findAll(pageable, applicationUser), HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity<Product> getProductId(Long id, @AuthenticationPrincipal ApplicationUser applicationUser) {
-        return new ResponseEntity<>(productService.findById(id), HttpStatus.OK);
+        return new ResponseEntity<>(productService.findById(id, applicationUser), HttpStatus.OK);
     }
 
     @Override

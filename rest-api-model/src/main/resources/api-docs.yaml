@@ -508,16 +508,12 @@ paths:
           "500":
             $ref: "#/components/responses/error500"
 
-  #####################################
-  ####### Expense Detail Endpoints ####
-  #####################################
-  /expense/detail:
     get:
       tags:
-        - ExpenseDetail
-      summary: Gets all Expense Details
-      description: Gets all expense details present.
-      operationId: getExpenseDetail
+        - Expense
+      summary: Gets all Expenses
+      description: Gets all expenses present.
+      operationId: getExpenses
       x-spring-provide-args: [ '@org.springframework.security.core.annotation.AuthenticationPrincipal ApplicationUser applicationUser' ]
       x-spring-paginated: true
       responses:
@@ -528,7 +524,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/ExpenseDetail"
+                  $ref: "#/components/schemas/Expense"
         "400":
           $ref: "#/components/responses/error400"
         "401":
@@ -540,15 +536,14 @@ paths:
         "500":
           $ref: "#/components/responses/error500"
 
-  /expense/detail/{id}:
+  /expense/{id}:
     get:
       tags:
-        - ExpenseDetail
-      summary: Gets an Expense Detail by ID
-      description: Gets an expense detail by its ID.
-      operationId: getExpenseDetail
+        - Expense
+      summary: Get Expense with respective ID
+      description: Get expense by his ID.
+      operationId: getExpenseById
       x-spring-provide-args: [ '@org.springframework.security.core.annotation.AuthenticationPrincipal ApplicationUser applicationUser' ]
-      x-spring-paginated: true
       parameters:
         - $ref: "#/components/parameters/findById"
       responses:
@@ -557,9 +552,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/ExpenseDetail"
+                $ref: "#/components/schemas/Expense"
         "400":
           $ref: "#/components/responses/error400"
         "401":
@@ -570,6 +563,7 @@ paths:
           $ref: "#/components/responses/error404"
         "500":
           $ref: "#/components/responses/error500"
+
 
 
 components:
@@ -725,32 +719,6 @@ components:
           format: double
         type:
           $ref: "#/components/schemas/Category"
-
-    ExpenseDetail:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        description:
-          type: string
-          minLength: 3
-          maxLength: 40
-        amount:
-          type: number
-          format: double
-        date:
-          type: string
-          format: date-time
-        product:
-          type: string
-          minLength: 2
-          maxLength: 40
-        unitPrice:
-          type: number
-          format: double
-        user:
-          $ref: "#/components/schemas/User"
 
     ProblemDetail:
       type: object

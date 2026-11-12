@@ -34,13 +34,13 @@ public class CategoryResource implements CategoryApi {
 
     @Override
     public ResponseEntity<Page<Category>> getCategory(Pageable pageable, @AuthenticationPrincipal ApplicationUser applicationUser) {
-        Page<Category> result = categoryService.findAll(pageable);
+        Page<Category> result = categoryService.findAll(pageable, applicationUser);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity<Category> getCategoryId(Long id, @AuthenticationPrincipal ApplicationUser applicationUser) {
-        Category result = categoryService.findById(id);
+        Category result = categoryService.findById(id, applicationUser);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 

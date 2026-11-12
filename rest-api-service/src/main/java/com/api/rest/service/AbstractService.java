@@ -1,6 +1,7 @@
 package com.api.rest.service;
 
 import com.api.rest.mapper.BaseMapper;
+import com.api.rest.service.security.ApplicationUser;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -27,22 +28,22 @@ public abstract class AbstractService<I, R extends JpaRepository<E, I>, M extend
     protected final R repository;
 
     @Transactional(readOnly = true)
-    public Page<D> findAll(Pageable pageable) {
+    public Page<D> findAll(Pageable pageable, @AuthenticationPrincipal ApplicationUser principal) {
         return repository.findAll(pageable).map(mapper::map);
     }
 
     @Transactional(readOnly = true)
-    public List<D> findAll() {
+    public List<D> findAll(@AuthenticationPrincipal ApplicationUser principal) {
         return repository.findAll().stream().map(mapper::map).toList();
     }
 
     @Transactional(readOnly = true)
-    public D findById(I id) {
+    public D findById(I id, @AuthenticationPrincipal ApplicationUser principal) {
         return repository.findById(id).map(mapper::map).orElseThrow(() -> new EntityNotFoundException("Entity not found with id: " + id));
     }
 
     @Transactional
-    public D create(D dto, @AuthenticationPrincipal Object principal) {
+    public D create(D dto, @AuthenticationPrincipal ApplicationUser principal) {
         E entity = mapper.mapReverse(dto);
         entity = enrich(entity, dto, principal);
         return mapper.map(repository.save(entity));
@@ -56,7 +57,7 @@ public abstract class AbstractService<I, R extends JpaRepository<E, I>, M extend
     }
 
     @Transactional
-    public void delete(I id, @AuthenticationPrincipal Object principal) {
+    public void delete(I id, @AuthenticationPrincipal ApplicationUser principal) {
         repository.deleteById(id);
     }
 

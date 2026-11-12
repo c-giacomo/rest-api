@@ -4,6 +4,7 @@ import com.api.rest.RestMvcControllerTest;
 import com.api.rest.config.security.WithApplicationUser;
 import com.api.rest.model.User;
 import com.api.rest.service.UserService;
+import com.api.rest.service.security.ApplicationUser;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +45,7 @@ class UserResourceTest {
         Pageable pageable = PageRequest.of(0, 10);
         Page<User> result = new PageImpl<>(list, pageable, list.size());
 
-        Mockito.when(userService.findAll(isA(Pageable.class))).thenReturn(result);
+        Mockito.when(userService.findAll(isA(Pageable.class), isA(ApplicationUser.class))).thenReturn(result);
 
         mockMvc.perform(get("/api/v1/users")
                 .contentType(MediaType.APPLICATION_JSON))
@@ -67,7 +68,7 @@ class UserResourceTest {
         User user = new User(1L, "Giacomo", "Chiavolotti", "c.giacomo@hotmail.it", "23G04c83."
                 ,"c.giacomo@hotmail.it", true, false, List.of("ADMIN"));
 
-        Mockito.when(userService.findById(1L)).thenReturn(user);
+        Mockito.when(userService.findById(Mockito.eq(1L), Mockito.any(ApplicationUser.class))).thenReturn(user);
 
         mockMvc.perform(get("/api/v1/users/1"))
                 .andExpectAll(
